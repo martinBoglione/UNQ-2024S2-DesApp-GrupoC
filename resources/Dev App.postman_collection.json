@@ -1,0 +1,64 @@
+{
+	"info": {
+		"_postman_id": "b05e43ce-3a5c-47d1-b1a3-eed0a8b89d4b",
+		"name": "Dev App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "11668063"
+	},
+	"item": [
+		{
+			"name": "Get All Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/getAll"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/getUser/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Register user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"John\",\r\n  \"surname\": \"Doe\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"address\": \"123Street\",\r\n  \"password\": \"Password@123\",\r\n  \"cvu\": \"1234567890123456789012\",\r\n  \"walletAddress\": \"87654321\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/registerUser"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete All Users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:8080/api/deleteAll"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:8080/api/deleteUser/1"
+			},
+			"response": []
+		}
+	]
+}
