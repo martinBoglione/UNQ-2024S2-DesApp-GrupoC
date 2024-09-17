@@ -1,11 +1,11 @@
 package ar.edu.unq.DevApp.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import ar.edu.unq.DevApp.model.exceptions.*;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Entity
 @Table(name = "users")
@@ -16,33 +16,32 @@ public class User {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     @Size(min=3, max=30)
-    @JsonProperty("name")
     private String name;
 
-    @Column
+    @Column(nullable = false)
     @Size(min=3, max=30)
     private String surname;
 
-    @Column
+    @Column(nullable = false)
     @Email(message = "El email debe tener un formato válido.")
     private String email;
 
-    @Column
+    @Column(nullable = false)
     @Size(min=10, max=30)
     private String address;
 
-    @Column
+    @Column(nullable = false)
     @Size(min=6)
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\W).*$", message = "La contraseña debe tener al menos una minúscula, una mayúscula, un carácter especial y tener una longitud mínima de 6 caracteres.")
+    //@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\W).*$", message = "La contraseña debe tener al menos una minúscula, una mayúscula, un carácter especial y tener una longitud mínima de 6 caracteres.")
     private String password;
 
-    @Column
+    @Column(nullable = false)
     @Size(min=22, max=22)
     private String cvu;
 
-    @Column
+    @Column(nullable = false)
     @Size(min=8, max=8)
     private String walletAddress;
 
@@ -57,6 +56,51 @@ public class User {
     }
 
     public User() {}
+
+    public void validateUser() {
+        if(!isValidName(this.name,this.surname))  {throw new InvalidNameException();}
+
+        if (!isValidEmail(this.email)) {throw new InvalidEmailException();}
+
+        if (!isValidAddress(this.address)) {throw new InvalidAddressException();}
+
+        if (!isValidPassword(this.password)) {throw new InvalidPasswordException();}
+
+        if (!isValidCVU(this.cvu)) {throw new InvalidCVUException();}
+
+        if (!isValidWallet(this.walletAddress)) {throw new InvalidWalletException();}
+    }
+
+    public boolean isValidName(String name, String surname) {
+        return (name.length() >= 3 && name.length()<= 30) && (surname.length() >= 3 && surname.length() <= 30);
+    }
+
+    public boolean isValidEmail(String email) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.com$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    public boolean isValidAddress(String address) {
+        return address.length() >= 10 && address.length() <= 30;
+    }
+
+    public boolean isValidPassword(String password) {
+        String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\W).{6,}$";
+        Pattern pattern = Pattern.compile(passwordRegex);
+        Matcher matcher = pattern.matcher(password);
+        return matcher.matches();
+    }
+
+    public boolean isValidCVU(String cvu) {
+        return cvu.length() == 22;
+    }
+
+    public boolean isValidWallet(String walletAddress) {
+        return walletAddress.length() == 8;
+    }
+
 
     // Getters and Setters
     public String getName() {

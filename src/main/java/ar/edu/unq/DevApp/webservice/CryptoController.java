@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Tag(name = "Cryptos", description = "Cryptos APIs")
@@ -24,13 +23,12 @@ public class CryptoController {
     }
 
     @GetMapping("/getUser/{id}")
-    public Optional<User> getUser(@PathVariable Long id) {
+    public User getUser(@PathVariable Long id) {
         return this.cryptoService.getUserById(id);
     }
 
     @PostMapping("/registerUser")
     public User createUser(@RequestBody User user) {
-        System.out.println("Received user: " + user);
         return this.cryptoService.createUser(user);
     }
 
