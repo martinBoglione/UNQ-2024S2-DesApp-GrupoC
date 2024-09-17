@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class User {
 
     @Id
-    @Column(nullable = false, unique=true)
+    //@Column(nullable = false, unique=true)
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
@@ -25,7 +25,7 @@ public class User {
     private String surname;
 
     @Column(nullable = false)
-    @Email(message = "El email debe tener un formato válido.")
+    @Email(message = "Invalid email format.")
     private String email;
 
     @Column(nullable = false)

@@ -1,4 +1,4 @@
-package ar.edu.unq.DevApp.utils;
+package ar.edu.unq.DevApp.configurations;
 
 import java.util.List;
 
@@ -42,7 +42,7 @@ public class OpenAPIConfig {
                 .title("Cripto Middleware API")
                 .version("1.0")
                 .contact(contact)
-                .description("This API exposes endpoints bla bla bla.")
+                .description("This API exposes endpoints for the Cripto Middleware system.")
                 .termsOfService("https://github.com/martinBoglione/UNQ-2024S2-DesApp-GrupoC")
                 .license(mitLicense);
 
