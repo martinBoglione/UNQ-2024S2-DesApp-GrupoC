@@ -1,4 +1,4 @@
-package ar.edu.unq.DevApp.utils;
+package ar.edu.unq.DevApp.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

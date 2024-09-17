@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CryptoService {
+public class UserService {
 
     @Autowired
     UserRepository userRepository;
