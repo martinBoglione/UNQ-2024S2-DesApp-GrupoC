@@ -1,10 +1,10 @@
-package ar.edu.unq.DevApp;
+package ar.edu.unq.desapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DevAppApplicationTests {
+class CryptoExchangeApplicationTests {
 
 	@Test
 	void contextLoads() {

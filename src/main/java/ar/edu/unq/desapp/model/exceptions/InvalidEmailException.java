@@ -1,4 +1,4 @@
-package ar.edu.unq.DevApp.model.exceptions;
+package ar.edu.unq.desapp.model.exceptions;
 
 public class InvalidEmailException extends RuntimeException {
 

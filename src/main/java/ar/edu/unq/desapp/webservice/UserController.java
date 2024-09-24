@@ -1,7 +1,7 @@
-package ar.edu.unq.DevApp.webservice;
+package ar.edu.unq.desapp.webservice;
 
-import ar.edu.unq.DevApp.model.User;
-import ar.edu.unq.DevApp.service.UserService;
+import ar.edu.unq.desapp.model.User;
+import ar.edu.unq.desapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;

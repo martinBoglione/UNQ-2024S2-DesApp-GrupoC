@@ -1,0 +1,15 @@
+---------------------------------------------------------------------
+TAG v1.0.0
+---------------------------------------------------------------------
+NEW FEATURES (lo que están entregando y está funcionando):
+* Github Actions with SonarCloud
+* API Swagger
+* H2 Persistence
+* Users API (register user, list users, retrieve user, delete user)
+
+NOTES (ej: funcionalidad que falta, alguna consideración especial):
+* No unit tests yet.
+
+KNOWN ISSUES (ej: funcionalidad que saben que están funcionando diferente, algún error conocido en la funcionalidad terminada, etc) :
+* Users delete should be logic.
+* Password must be encrypted.

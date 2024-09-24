@@ -1,4 +1,4 @@
-package ar.edu.unq.DevApp.configurations;
+package ar.edu.unq.desapp.configurations;
 
 import java.util.List;
 

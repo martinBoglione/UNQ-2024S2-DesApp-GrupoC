@@ -1,8 +1,8 @@
-package ar.edu.unq.DevApp.service;
+package ar.edu.unq.desapp.service;
 
-import ar.edu.unq.DevApp.model.User;
-import ar.edu.unq.DevApp.model.exceptions.*;
-import ar.edu.unq.DevApp.repositories.UserRepository;
+import ar.edu.unq.desapp.model.User;
+import ar.edu.unq.desapp.model.exceptions.*;
+import ar.edu.unq.desapp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
-package ar.edu.unq.DevApp.model;
+package ar.edu.unq.desapp.model;
 
-import ar.edu.unq.DevApp.model.exceptions.*;
+import ar.edu.unq.desapp.model.exceptions.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 

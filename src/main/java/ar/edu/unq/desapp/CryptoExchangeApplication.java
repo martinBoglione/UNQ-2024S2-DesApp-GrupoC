@@ -1,13 +1,13 @@
-package ar.edu.unq.DevApp;
+package ar.edu.unq.desapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DevAppApplication {
+public class CryptoExchangeApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DevAppApplication.class, args);
+		SpringApplication.run(CryptoExchangeApplication.class, args);
 	}
 
 }

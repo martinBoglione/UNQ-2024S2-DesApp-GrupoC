@@ -1,6 +1,6 @@
-package ar.edu.unq.DevApp.repositories;
+package ar.edu.unq.desapp.repositories;
 
-import ar.edu.unq.DevApp.model.User;
+import ar.edu.unq.desapp.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package ar.edu.unq.DevApp.model.exceptions;
+package ar.edu.unq.desapp.model.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
