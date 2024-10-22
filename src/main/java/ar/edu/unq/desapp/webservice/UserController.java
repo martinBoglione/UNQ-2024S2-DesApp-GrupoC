@@ -25,7 +25,7 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "Users retrieved successfully", content = { @Content(schema = @Schema(implementation = User.class), mediaType = "application/json") }),
             @ApiResponse(responseCode = "400", description = "User with ID # not found", content = { @Content(schema = @Schema()) }),
             @ApiResponse(responseCode = "500", description = "Internal server error", content = { @Content(schema = @Schema()) }) })
-    @GetMapping("/users")
+    @GetMapping("/users/all")
     public List<User> getAllUsers() {
         return this.userService.getAllUsers();
     }
@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @Operation(summary = "Register user", description = "Register one user in database")
-    @PostMapping("/users")
+    @PostMapping("/users/create")
     public User createUser(@RequestBody User user) {
         return this.userService.createUser(user);
     }
