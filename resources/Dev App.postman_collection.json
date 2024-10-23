@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "c93ba616-ce2e-4e78-945b-6ae958bcfa8f",
+		"_postman_id": "c69b6a36-60fe-45ce-b36c-11fadb0f220e",
 		"name": "Dev App",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "38410548"
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "11668063"
 	},
 	"item": [
 		{
@@ -11,18 +11,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/users",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"users"
-					]
-				}
+				"url": "http://localhost:8080/api/users/all"
 			},
 			"response": []
 		},
@@ -31,19 +20,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/users/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"users",
-						"1"
-					]
-				}
+				"url": "http://localhost:8080/api/users/1"
 			},
 			"response": []
 		},
@@ -54,25 +31,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"John\",\r\n  \"surname\": \"Doe\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"address\": \"123Street 10101010\",\r\n  \"password\": \"Password@123\",\r\n  \"cvu\": \"1234567890123456789012\",\r\n  \"walletAddress\": \"87654321\"\r\n}",
+					"raw": "{\r\n  \"name\": \"John\",\r\n  \"surname\": \"Doe\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"address\": \"123Street101010\",\r\n  \"password\": \"Password#12345\",\r\n  \"cvu\": \"1234567890123456789012\",\r\n  \"walletAddress\": \"12345678\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": {
-					"raw": "http://localhost:8080/api/users",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"users"
-					]
-				}
+				"url": "http://localhost:8080/api/users/create"
 			},
 			"response": []
 		},
@@ -81,19 +47,25 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/users/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"users",
-						"1"
-					]
-				}
+				"url": "http://localhost:8080/api/users/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Cryptos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/crypto/CAKEUSDT"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Crypto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/crypto/all"
 			},
 			"response": []
 		}
