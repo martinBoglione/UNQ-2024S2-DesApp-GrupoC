@@ -40,8 +40,6 @@ public class User {
 
     @Column(nullable = false)
     @Size(min=6)
-    //TODO @JsonIgnore - Que hace esto? Lo tuve que comentar porque sino tira un null pointer en la passwrod y no se puede crear un usuario.
-    //@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\W).*$", message = "La contraseña debe tener al menos una minúscula, una mayúscula, un carácter especial y tener una longitud mínima de 6 caracteres.")
     private String password;
 
     @Column(nullable = false)
@@ -51,6 +49,9 @@ public class User {
     @Column(nullable = false)
     @Size(min=8, max=8)
     private String walletAddress;
+
+    @Column(nullable = false)
+    private boolean deleted = false;
 
     public void validateUser() {
         System.out.println("Password: " + this.password);

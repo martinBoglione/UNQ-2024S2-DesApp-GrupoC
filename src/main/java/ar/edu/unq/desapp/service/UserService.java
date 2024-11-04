@@ -29,19 +29,19 @@ public class UserService {
     }
 
     public User getUserById(Long id) {
-        return userRepository.findById(id)
+        return userRepository.findActiveUserById(id)
                 .orElseThrow(() -> new UserNotFoundException("User with ID " + id + " not found"));
     }
 
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        return userRepository.findAllActiveUsers();
     }
 
     public void deleteUser(Long id) {
         if (!userRepository.existsById(id)) {
             throw new UserNotFoundException("User with ID " + id + " not found");
         }
-        userRepository.deleteById(id);
+        userRepository.softDeleteById(id);
     }
 
     public void deleteAll() {
