@@ -1,6 +1,7 @@
 package ar.edu.unq.desapp.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -26,6 +27,7 @@ public class Order {
     private LocalDateTime timestamp;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private CryptoAsset asset;
 
     @Column(nullable = false)
@@ -37,13 +39,16 @@ public class Order {
     @Column(nullable = false)
     private double amount_ars;
 
-    @Column(nullable = false)
+    @NotNull(message = "The user cannot be null.")
+    @ManyToOne
     private User user;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private OperationType operation_type;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
 }
