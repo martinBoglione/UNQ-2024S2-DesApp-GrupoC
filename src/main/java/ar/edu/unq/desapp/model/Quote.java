@@ -21,7 +21,7 @@ public class Quote {
     private LocalDateTime timestamp;
 
     @Column(nullable = false)
-    private String asset;
+    private CryptoAsset asset;
 
     @Column(nullable = false)
     private double price;

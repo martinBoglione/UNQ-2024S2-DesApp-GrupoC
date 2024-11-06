@@ -42,12 +42,6 @@ public class UserController {
         return this.userService.createUser(user);
     }
 
-    /* delete all should not be part of the API
-    @PostMapping("/deleteAll")
-    public void deleteAllUsers() {
-        this.userService.deleteAll();
-    }*/
-
     @Operation(summary = "Delete user", description = "Delete one user by ID")
     @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable Long id) {
