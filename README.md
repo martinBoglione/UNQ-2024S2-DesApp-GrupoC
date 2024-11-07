@@ -33,18 +33,18 @@ H2: <http://localhost:8080/h2-console/>
 |Clean Code según la materia (todo en Ingles)|:green_circle:|
 |Configuracion de https://swagger.io/ en el back-API (v3)|:green_circle:|
 |**-- Modelo**|:white_circle:|
-|Implementar modelo completo|:yellow_circle:|
+|Implementar modelo completo|:green_circle:|
 |Testing automático unitario según las pautas de la materia|:red_circle:|
 |**-- Funcionalidad**|:white_circle:|
 |Proveer servicio de registracion de usuario (punto 1)|:green_circle:|
 
 |Entrega Nro 2| |
-|---|---|
+|---|--|
 |**-- Core**|:white_circle:|
 |Estado de build en "Verde"| |
 |Utilizar HSQLDB para persistir datos (opcion H2)|:green_circle:|
 |Crear datos de prueba cuando levanta la aplicación| |
-|Documentation de Endpoints (APIs) con Swagger (v3)| |
+|Documentation de Endpoints (APIs) con Swagger (v3)|:green_circle:|
 |TAG en GitHub y Confeccionar Release Notes de entrega 2| |
 |Implementar JOB de Coverage| |
 |Testing de endpoints usando Postman| |

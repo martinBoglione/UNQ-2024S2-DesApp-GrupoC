@@ -3,6 +3,7 @@ package ar.edu.unq.desapp.webservice;
 import ar.edu.unq.desapp.model.User;
 import ar.edu.unq.desapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.List;
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/api")
@@ -42,15 +44,37 @@ public class UserController {
         return this.userService.createUser(user);
     }
 
-    /* delete all should not be part of the API
-    @PostMapping("/deleteAll")
-    public void deleteAllUsers() {
-        this.userService.deleteAll();
-    }*/
-
     @Operation(summary = "Delete user", description = "Delete one user by ID")
     @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable Long id) {
         this.userService.deleteUser(id);
     }
+
+    @Operation(summary = "Operated volume between dates range for user")
+    @GetMapping("/users/report")
+    public ResponseEntity<String> reportOperatedVolume(@RequestParam String email, @RequestParam LocalDate fromDate, @RequestParam LocalDate toDate) {
+        /* TODO
+        *    7. Dado un usuario,  Informar el volumen operado de cripto activos entre dos fechas.
+            Dia y hora de solicitud
+            Valor total operado en dólares
+            Valor total operado en pesos ARG
+            Activos:
+            Criptoactivo
+            Cantidad nominal del Cripto Activo
+            Cotización actual del Cripto Activo
+            Monto de la cotización en pesos ARG
+            */
+        return ResponseEntity.ok("ok");
+    }
+
+    @Operation(summary = "Users list with reputation")
+    @GetMapping("/users/all-with-reputation")
+    public ResponseEntity<String> getAllUsersWithReputation() {
+        /* TODO
+        *   Listado de usuarios de la plataforma
+            Nombre, Apellido, Cantidad Operaciones, Reputación
+            */
+        return ResponseEntity.ok("ok");
+    }
+
 }
