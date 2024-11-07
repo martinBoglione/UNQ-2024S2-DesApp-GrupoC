@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 @Tag(name = "Quotes", description = "Crypto Quotes APIs")
-public class CryptoController {
+public class QuotesController {
 
     @Autowired
     CryptoService cryptoService;
@@ -29,8 +29,23 @@ public class CryptoController {
     }
 
     @Operation(summary = "Get last quotes for all known cryptocurrencies")
+    @GetMapping("/quotes/latest")
+    public ResponseEntity<CryptoList> getLastPersistedCryptoCurrencyPrices() {
+        /* TODO
+        *   Cambiar esto, debe traer desde la BD, sin cache. */
+
+        CryptoList list = cryptoService.getAllCryptoPrices();
+        return ResponseEntity.ok().body(list);
+    }
+
+    @Operation(summary = "Get cached quotes (fast response)")
     @GetMapping("/quotes")
     public ResponseEntity<CryptoList> getAllCryptoCurrencyPrices() {
+        /* TODO
+        *   B. Listado de cotizaciones (precio cada 10 minutos)
+            Cripto Activo, precio, hora de actualizaciòn
+            El servicio B debe poder contestar en el orden de los milisegundos y puede contener valores no actualizados.
+        */
         CryptoList list = cryptoService.getAllCryptoPrices();
         return ResponseEntity.ok().body(list);
     }

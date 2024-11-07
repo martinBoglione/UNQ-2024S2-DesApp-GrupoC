@@ -31,6 +31,27 @@
 					"response": []
 				},
 				{
+					"name": "Get all with reputation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/all-with-reputation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"all-with-reputation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get User",
 					"request": {
 						"method": "GET",
@@ -101,6 +122,41 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Operated volume",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/report?email=micorreo@gmail.com&fromDate=20241005&toDate=20241120",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"report"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "micorreo@gmail.com"
+								},
+								{
+									"key": "fromDate",
+									"value": "20241005"
+								},
+								{
+									"key": "toDate",
+									"value": "20241120"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -108,7 +164,7 @@
 			"name": "Crypto Quotes",
 			"item": [
 				{
-					"name": "Get last quotes for all",
+					"name": "Get Cached quotes",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -122,6 +178,27 @@
 							"path": [
 								"api",
 								"quotes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get latest quotes for all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/quotes/latest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"quotes",
+								"latest"
 							]
 						}
 					},
@@ -165,6 +242,175 @@
 								"quotes",
 								"24h",
 								"CAKEUSDT"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "Get active orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel order",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orders/cancel/54",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"cancel",
+								"54"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create sell order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"asset\": \"ETHUSDT\",\n  \"quantity\": 15,\n  \"price\": 12555,\n  \"amount_ars\": 12555000,\n  \"user\": \"corre@gmail.com\",\n  \"operation_type\": \"SELL\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/orders/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create buy order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"asset\": \"BTCUSDT\",\n  \"quantity\": 4,\n  \"price\": 65000,\n  \"amount_ars\": 65000000,\n  \"user\": \"corre@gmail.com\",\n  \"operation_type\": \"BUY\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/orders/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fill order (crete transaction)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"asset\": \"BTCUSDT\",\n  \"quantity\": 4,\n  \"price\": 65000,\n  \"amount_ars\": 65000000,\n  \"user\": \"corre@gmail.com\",\n  \"operation_type\": \"BUY\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/orders/fill/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"fill",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm transaction",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"asset\": \"BTCUSDT\",\n  \"quantity\": 4,\n  \"price\": 65000,\n  \"amount_ars\": 65000000,\n  \"user\": \"corre@gmail.com\",\n  \"operation_type\": \"BUY\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/orders/confirm/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"confirm",
+								"{id}"
 							]
 						}
 					},
