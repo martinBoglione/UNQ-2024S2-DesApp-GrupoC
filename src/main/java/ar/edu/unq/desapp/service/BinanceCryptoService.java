@@ -13,7 +13,6 @@ public class BinanceCryptoService {
     private String binanceApiURL;
 
     public Crypto getCryptoCurrencyValue(String symbol) {
-        Crypto crypto = restTemplate.getForObject(binanceApiURL + "ticker/price?symbol=" + symbol, Crypto.class);
-        return crypto;
+        return restTemplate.getForObject(binanceApiURL + "ticker/price?symbol=" + symbol, Crypto.class);
     }
 }

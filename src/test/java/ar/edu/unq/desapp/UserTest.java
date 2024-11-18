@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class UserTest {
+class UserTest {
 
     private User user;
 
@@ -26,12 +26,12 @@ public class UserTest {
     }
 
     @Test
-    public void testValidUser() {
+    void testValidUser() {
         Assertions.assertDoesNotThrow(() -> user.validateUser());
     }
 
     @Test
-    public void testInvalidNameThrowsException() {
+    void testInvalidNameThrowsException() {
         user.setName("Ma");
         Exception exception = Assertions.assertThrows(InvalidNameException.class, user::validateUser);
         Assertions.assertEquals(InvalidNameException.class, exception.getClass());
@@ -43,21 +43,21 @@ public class UserTest {
     }
 
     @Test
-    public void testInvalidEmailThrowsException() {
+    void testInvalidEmailThrowsException() {
         user.setEmail("invalid-email");
         Exception exception = Assertions.assertThrows(InvalidEmailException.class, user::validateUser);
         Assertions.assertEquals(InvalidEmailException.class, exception.getClass());
     }
 
     @Test
-    public void testInvalidAddressThrowsException() {
+    void testInvalidAddressThrowsException() {
         user.setAddress("Short");
         Exception exception = Assertions.assertThrows(InvalidAddressException.class, user::validateUser);
         Assertions.assertEquals(InvalidAddressException.class, exception.getClass());
     }
 
     @Test
-    public void testInvalidPasswordThrowsException() {
+    void testInvalidPasswordThrowsException() {
         user.setPassword("weak"); // No uppercase or special characters
         Exception exception = Assertions.assertThrows(InvalidPasswordException.class, user::validateUser);
         Assertions.assertEquals(InvalidPasswordException.class, exception.getClass());
@@ -68,53 +68,53 @@ public class UserTest {
     }
 
     @Test
-    public void testInvalidCVUThrowsException() {
+    void testInvalidCVUThrowsException() {
         user.setCvu("12345678901234567890"); // Less than 22 characters
         Exception exception = Assertions.assertThrows(InvalidCVUException.class, user::validateUser);
         Assertions.assertEquals(InvalidCVUException.class, exception.getClass());
     }
 
     @Test
-    public void testInvalidWalletAddressThrowsException() {
+    void testInvalidWalletAddressThrowsException() {
         user.setWalletAddress("1234567"); // Less than 8 characters
         Exception exception = Assertions.assertThrows(InvalidWalletException.class, user::validateUser);
         Assertions.assertEquals(InvalidWalletException.class, exception.getClass());
     }
 
     @Test
-    public void testIsValidName() {
+    void testIsValidName() {
         Assertions.assertEquals(true, user.isValidName("Martin", "Boglione"));
         Assertions.assertEquals(false, user.isValidName("Ma", "Boglione"));
         Assertions.assertEquals(false, user.isValidName("Martin", "B"));
     }
 
     @Test
-    public void testIsValidEmail() {
+    void testIsValidEmail() {
         Assertions.assertEquals(true, user.isValidEmail("martinboglione97@gmail.com"));
         Assertions.assertEquals(false, user.isValidEmail("invalid-email"));
     }
 
     @Test
-    public void testIsValidAddress() {
+    void testIsValidAddress() {
         Assertions.assertEquals(true, user.isValidAddress("Segurola y Habana 4310"));
         Assertions.assertEquals(false, user.isValidAddress("Short"));
     }
 
     @Test
-    public void testIsValidPassword() {
+    void testIsValidPassword() {
         Assertions.assertEquals(true, user.isValidPassword("Maradona10!"));
         Assertions.assertEquals(false, user.isValidPassword("weak"));
         Assertions.assertEquals(false, user.isValidPassword("StrongPass"));
     }
 
     @Test
-    public void testIsValidCVU() {
+    void testIsValidCVU() {
         Assertions.assertEquals(true, user.isValidCVU("1234567890123456789012"));
         Assertions.assertEquals(false, user.isValidCVU("12345678901234567890"));
     }
 
     @Test
-    public void testIsValidWalletAddress() {
+    void testIsValidWalletAddress() {
         Assertions.assertEquals(true, user.isValidWallet("12345678"));
         Assertions.assertEquals(false, user.isValidWallet("1234567"));
     }

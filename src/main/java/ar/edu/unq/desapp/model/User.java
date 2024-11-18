@@ -1,10 +1,10 @@
 package ar.edu.unq.desapp.model;
 
 import ar.edu.unq.desapp.model.exceptions.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.*;
@@ -41,6 +41,7 @@ public class User {
     @Column(nullable = false)
     @Size(min=6)
     private String password;
+    private static final Logger logger = Logger.getLogger(User.class.getName());
 
     @Column(nullable = false)
     @Size(min=22, max=22)
@@ -54,7 +55,7 @@ public class User {
     private boolean deleted = false;
 
     public void validateUser() {
-        System.out.println("Password: " + this.password);
+        logger.info("Validating user with password length: " + password.length());
         if(!isValidName(this.name,this.surname))  {throw new InvalidNameException();}
 
         if (!isValidEmail(this.email)) {throw new InvalidEmailException();}

@@ -37,7 +37,7 @@ public class Order {
     private double price;
 
     @Column(nullable = false)
-    private double amount_ars;
+    private double amountArs;
 
     @NotNull(message = "The user cannot be null.")
     @ManyToOne
@@ -45,7 +45,7 @@ public class Order {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private OperationType operation_type;
+    private OperationType operationType;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

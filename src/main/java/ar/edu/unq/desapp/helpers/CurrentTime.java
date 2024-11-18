@@ -20,7 +20,6 @@ public class CurrentTime {
     }
 
     public static SimpleDateFormat getNewDateFormatter(){
-        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
-        return formatter;
+        return new SimpleDateFormat(DATE_FORMAT);
     }
 }

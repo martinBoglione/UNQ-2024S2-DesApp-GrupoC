@@ -1,11 +1,12 @@
 package ar.edu.unq.desapp.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CryptoList {
-    public ArrayList<Crypto> cryptos = new ArrayList<>();
+    public List<Crypto> cryptos = new ArrayList<>();
 
-    public void CryptoCurrencyList() {
+    public void cryptoCurrencyList() {
         //Empty Constructor
     }
 

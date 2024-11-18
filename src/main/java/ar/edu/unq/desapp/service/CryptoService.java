@@ -5,7 +5,6 @@ import ar.edu.unq.desapp.model.Crypto;
 import ar.edu.unq.desapp.model.CryptoAsset;
 import ar.edu.unq.desapp.model.CryptoList;
 import ar.edu.unq.desapp.repositories.CryptoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +14,13 @@ import java.util.Date;
 @Service
 public class CryptoService {
 
-    @Autowired
-    CryptoRepository cryptoRepository;
+    private final CryptoRepository cryptoRepository;
+    private final BinanceCryptoService binanceCryptoService;
 
-    @Autowired
-    BinanceCryptoService binanceCryptoService;
+    public CryptoService(CryptoRepository cryptoRepository, BinanceCryptoService binanceCryptoService) {
+        this.cryptoRepository = cryptoRepository;
+        this.binanceCryptoService = binanceCryptoService;
+    }
 
 
     public CryptoList getAllCryptoPrices() {

@@ -2,7 +2,6 @@ package ar.edu.unq.desapp.webservice;
 
 import ar.edu.unq.desapp.model.User;
 import ar.edu.unq.desapp.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,14 +18,16 @@ import java.time.LocalDate;
 @Tag(name = "Users", description = "Users APIs")
 public class UserController {
 
-    @Autowired
-    UserService userService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @Operation(summary = "Get all users", description = "Retrieve all users in database")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Users retrieved successfully", content = { @Content(schema = @Schema(implementation = User.class), mediaType = "application/json") }),
-            @ApiResponse(responseCode = "400", description = "User with ID # not found", content = { @Content(schema = @Schema()) }),
-            @ApiResponse(responseCode = "500", description = "Internal server error", content = { @Content(schema = @Schema()) }) })
+    @ApiResponse(responseCode = "200", description = "Users retrieved successfully", content = { @Content(schema = @Schema(implementation = User.class), mediaType = "application/json") })
+    @ApiResponse(responseCode = "400", description = "User with ID # not found", content = { @Content(schema = @Schema()) })
+    @ApiResponse(responseCode = "500", description = "Internal server error", content = { @Content(schema = @Schema()) })
     @GetMapping("/users/all")
     public List<User> getAllUsers() {
         return this.userService.getAllUsers();
