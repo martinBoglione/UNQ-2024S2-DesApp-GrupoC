@@ -4,6 +4,7 @@ import ar.edu.unq.desapp.model.exceptions.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -55,7 +56,10 @@ public class User {
     private boolean deleted = false;
 
     public void validateUser() {
-        logger.info("Validating user with password length: " + password.length());
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info("Validating user with password length: " + password.length());
+        }
+
         if(!isValidName(this.name,this.surname))  {throw new InvalidNameException();}
 
         if (!isValidEmail(this.email)) {throw new InvalidEmailException();}

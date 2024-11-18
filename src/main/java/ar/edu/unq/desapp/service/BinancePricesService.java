@@ -1,8 +1,6 @@
 package ar.edu.unq.desapp.service;
 
-import ar.edu.unq.desapp.model.User;
 import ar.edu.unq.desapp.repositories.QuoteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import java.util.logging.Logger;
