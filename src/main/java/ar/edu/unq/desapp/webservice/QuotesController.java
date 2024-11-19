@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 @Tag(name = "Quotes", description = "Crypto Quotes APIs")
@@ -55,13 +57,8 @@ public class QuotesController {
     @Operation(summary = "Get 24H quotes for a given crypto")
     @GetMapping("/quotes/24h/{symbol}")
     public ResponseEntity get24HoursQuotes(@Parameter(description = "The cryptocurrency symbol that needs to be fetched", required = true) @PathVariable String symbol) {
-        /*
-        TODO
-        * 3. Mostrar las cotizaciones de las últimas 24hs para un cripto activo dado.(consolidado por hora)
-        Criptoactivo
-        Dia y Hora de cotización
-        Cotización del Cripto Activo
-    */
-        return ResponseEntity.ok().body("completar!!");
+
+        List list = cryptoService.getCryptoClosingPricesLast24Hours(symbol);
+        return ResponseEntity.ok().body(list);
     }
 }

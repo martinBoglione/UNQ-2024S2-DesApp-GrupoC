@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class CryptoService {
@@ -39,8 +40,7 @@ public class CryptoService {
 
 
     @Cacheable(value = "cryptoCache", key = "#symbol")
-    public Crypto getCryptoValue(
-            String symbol) {
+    public Crypto getCryptoValue(String symbol) {
         Crypto entity = binanceCryptoService.getCryptoCurrencyValue(symbol);
 
         SimpleDateFormat formatter = CurrentTime.getNewDateFormatter();
@@ -49,4 +49,10 @@ public class CryptoService {
         }
         return entity;
     }
+
+
+    public List<Crypto> getCryptoClosingPricesLast24Hours(String symbol) {
+        return binanceCryptoService.getCryptoClosingPricesLast24Hours(symbol);
+    }
+
 }
