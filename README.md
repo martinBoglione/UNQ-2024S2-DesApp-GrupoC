@@ -1,5 +1,7 @@
 # Universidad Nacional de Quilmes
+
 ## Desarrollo de Aplicaciones - 2c 2024
+
 ## Trabajo Práctico - Crypto Exchange
 
 [![SonarCloud](https://github.com/martinBoglione/UNQ-2024S2-DesApp-GrupoC/actions/workflows/build.yml/badge.svg)](https://github.com/martinBoglione/UNQ-2024S2-DesApp-GrupoC/actions/workflows/build.yml)
@@ -17,9 +19,7 @@ ___
 Swagger: <http://localhost:8080/swagger-ui/index.html>  
 H2: <http://localhost:8080/h2-console/>
 
-:green_circle: 
-:yellow_circle: 
-:red_circle: 
+:green_circle: :yellow_circle: :red_circle:
 
 |Entrega Nro 1| |
 |---|---|
@@ -39,15 +39,15 @@ H2: <http://localhost:8080/h2-console/>
 |Proveer servicio de registracion de usuario (punto 1)|:green_circle:|
 
 |Entrega Nro 2| |
-|---|--|
+|---|-|
 |**-- Core**|:white_circle:|
-|Estado de build en "Verde"| |
+|Estado de build en "Verde"|:yellow_circle:|
 |Utilizar HSQLDB para persistir datos (opcion H2)|:green_circle:|
 |Crear datos de prueba cuando levanta la aplicación| |
 |Documentation de Endpoints (APIs) con Swagger (v3)|:green_circle:|
 |TAG en GitHub y Confeccionar Release Notes de entrega 2| |
 |Implementar JOB de Coverage| |
-|Testing de endpoints usando Postman| |
+|Testing de endpoints usando Postman|:yellow_circle:|
 |**-- Funcionalidad**|:white_circle:|
 |Listar cotizacion de criptoactivos| |
 |Permitir que un usuario exprese su intención de compra/venta| |
@@ -58,13 +58,13 @@ H2: <http://localhost:8080/h2-console/>
 
 |Entrega Nro 3| |
 |---|---|
-|**-- Core**|:white_circle:|
-|Crear un test de arquitectura| |
-|Auditoria de Web-Services. Loguear <timestamp,user,operación/metodo, parámetros, tiempoDeEjecicion> de los servicios publicados con Spring utilizando Log4j/logback| |
-|TAG en GitHub y Confeccionar Release Notes de entrega 3| |
-|Configurar <https://www.baeldung.com/spring-boot-prometheus> (Metricas)| |
-|Configurar <https://www.baeldung.com/spring-boot-actuators> (Endpoints de Monitoreo)| |
-|**-- Funcionalidad**|:white_circle:|
-|Segurizar el acceso a la API (JWT)| |
-|Mostrar las cotizaciones de las últimas 24hs para un cripto activo dado| |
-|Listado de cotizaciones (alta performance - implementar cache)| |
+|**-- Core**| :white_circle: |
+|Crear un test de arquitectura|                |
+|Auditoria de Web-Services. Loguear <timestamp,user,operación/metodo, parámetros, tiempoDeEjecicion> de los servicios publicados con Spring utilizando Log4j/logback|:green_circle:|
+|TAG en GitHub y Confeccionar Release Notes de entrega 3|                |
+|Configurar <https://www.baeldung.com/spring-boot-prometheus> (Metricas)|                |
+|Configurar <https://www.baeldung.com/spring-boot-actuators> (Endpoints de Monitoreo)|                |
+|**-- Funcionalidad**| :white_circle: |
+|Segurizar el acceso a la API (JWT)|                |
+|Mostrar las cotizaciones de las últimas 24hs para un cripto activo dado|                |
+|Listado de cotizaciones (alta performance - implementar cache)|                |

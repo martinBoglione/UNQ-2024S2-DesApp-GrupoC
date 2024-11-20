@@ -3,12 +3,12 @@ package ar.edu.unq.desapp.service;
 import ar.edu.unq.desapp.repositories.QuoteRepository;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import java.util.logging.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
+@Slf4j
 public class BinancePricesService {
 
-    private static final Logger logger = Logger.getLogger(BinancePricesService.class.getName());
     private final QuoteRepository quoteRepository;
 
     public BinancePricesService(QuoteRepository quoteRepository) {
@@ -17,6 +17,6 @@ public class BinancePricesService {
 
     @Scheduled(fixedDelayString="${cryptoexchange.quotes.refreshDelay:600}000", initialDelay = 2000)
     public void fetchQuotes() {
-        logger.info("Trayendo cotizaciones");
+        log.info("Trayendo cotizaciones");
     }
 }
