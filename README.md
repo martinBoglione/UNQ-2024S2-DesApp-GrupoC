@@ -66,5 +66,5 @@ H2: <http://localhost:8080/h2-console/>
 |Configurar <https://www.baeldung.com/spring-boot-actuators> (Endpoints de Monitoreo)|                |
 |**-- Funcionalidad**| :white_circle: |
 |Segurizar el acceso a la API (JWT)|                |
-|Mostrar las cotizaciones de las últimas 24hs para un cripto activo dado|                |
+|Mostrar las cotizaciones de las últimas 24hs para un cripto activo dado|:green_circle:|
 |Listado de cotizaciones (alta performance - implementar cache)|                |
