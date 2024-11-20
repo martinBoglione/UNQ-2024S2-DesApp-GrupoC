@@ -1,0 +1,67 @@
+package ar.edu.unq.desapp.helpers.aspects;
+
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
+import lombok.extern.slf4j.Slf4j;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+@Aspect
+@Slf4j
+@Component
+public class LogExecutionTimeAspectAnnotation {
+
+    /* This logging aspect works with @LogExecutionTime annotation, it means
+    *  we need to mark every method/service/request to be audited. -LM
+    * */
+
+    @Around("@annotation(LogExecutionTime)")
+    public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
+        String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()); // Enhanced timestamp format
+
+        Object proceed;
+
+        long start = System.currentTimeMillis();
+        try {
+            proceed = joinPoint.proceed(); // Execute the targeted method
+        } catch (Throwable throwable) {
+            log.error("Exception occurred during method execution: ", throwable);
+            throw throwable;
+        }
+        long executionTime = System.currentTimeMillis() - start;
+
+        String user = getCurrentUser();
+        String operation = joinPoint.getSignature().getName();
+        String parameters = getMethodParameters(joinPoint.getArgs());
+
+        // "\u001B[33m[%s] [%s] [%s] [%s] - Executed in %dms\u001B[0m"
+        String logMessage = String.format(
+                "User: %s | Operation: [%s] | Params: %s | Elapsed time: %dms",
+                user, operation, parameters, executionTime);
+        log.info(logMessage);
+
+        return proceed;
+    }
+
+    private String getCurrentUser() {
+        /* TODO
+        descomentar cuando esté implementada la seguridad
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            return authentication.getName();
+        }
+         */
+
+        return "anonymous";
+    }
+
+    private String getMethodParameters(Object[] args) {
+        return args != null ? java.util.Arrays.toString(args) : "[]";
+    }
+}

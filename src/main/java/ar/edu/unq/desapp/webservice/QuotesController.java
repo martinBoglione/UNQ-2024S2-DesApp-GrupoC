@@ -1,5 +1,6 @@
 package ar.edu.unq.desapp.webservice;
 
+import ar.edu.unq.desapp.helpers.aspects.LogExecutionTime;
 import ar.edu.unq.desapp.model.Crypto;
 import ar.edu.unq.desapp.model.CryptoList;
 import ar.edu.unq.desapp.service.CryptoService;
@@ -25,6 +26,7 @@ public class QuotesController {
         this.cryptoService = cryptoService;
     }
 
+    @LogExecutionTime
     @Operation(summary = "Get last quote for a given crypto")
     @GetMapping("/quotes/{symbol}")
     public ResponseEntity<Crypto> getCryptoCurrencyValue(@Parameter(description = "The cryptocurrency symbol that needs to be fetched", required = true) @PathVariable String symbol) {
@@ -32,6 +34,7 @@ public class QuotesController {
         return ResponseEntity.ok().body(entity);
     }
 
+    @LogExecutionTime
     @Operation(summary = "Get last quotes for all known cryptocurrencies")
     @GetMapping("/quotes/latest")
     public ResponseEntity<CryptoList> getLastPersistedCryptoCurrencyPrices() {
@@ -42,6 +45,7 @@ public class QuotesController {
         return ResponseEntity.ok().body(list);
     }
 
+    @LogExecutionTime
     @Operation(summary = "Get cached quotes (fast response)")
     @GetMapping("/quotes")
     public ResponseEntity<CryptoList> getAllCryptoCurrencyPrices() {
@@ -54,6 +58,7 @@ public class QuotesController {
         return ResponseEntity.ok().body(list);
     }
 
+    @LogExecutionTime
     @Operation(summary = "Get 24H quotes for a given crypto")
     @GetMapping("/quotes/24h/{symbol}")
     public ResponseEntity get24HoursQuotes(@Parameter(description = "The cryptocurrency symbol that needs to be fetched", required = true) @PathVariable String symbol) {

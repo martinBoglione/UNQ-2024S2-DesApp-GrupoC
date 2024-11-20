@@ -1,5 +1,6 @@
 package ar.edu.unq.desapp.webservice;
 
+import ar.edu.unq.desapp.helpers.aspects.LogExecutionTime;
 import ar.edu.unq.desapp.model.Order;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,6 +14,7 @@ import java.util.List;
 @Tag(name = "Transactions", description = "Orders (intentions) & Operations APIs")
 public class TransactionsController {
 
+    @LogExecutionTime
     @Operation(summary = "Get active orders")
     @GetMapping("/orders")
     public List<Order> getActiveOrders() {
@@ -33,6 +35,7 @@ public class TransactionsController {
         return List.of();
     }
 
+    @LogExecutionTime
     @Operation(summary = "Register order")
     @PostMapping("/orders/create")
     public Order createOrder(@RequestBody Order order) {
@@ -48,6 +51,7 @@ public class TransactionsController {
         return new Order();
     }
 
+    @LogExecutionTime
     @Operation(summary = "Cancel order (forced by user)")
     @PatchMapping("/orders/cancel/{id}")
     public void cancelOrder(@PathVariable Long id) {
@@ -58,6 +62,7 @@ public class TransactionsController {
         return;
     }
 
+    @LogExecutionTime
     @Operation(summary = "User (counterparty) wants to fill an order (transact)")
     @PostMapping("/orders/fill/{id}")
     public ResponseEntity<String> fillOrder(@PathVariable Long id) {
@@ -71,6 +76,7 @@ public class TransactionsController {
         return ResponseEntity.ok("ok");
     }
 
+    @LogExecutionTime
     @Operation(summary = "User (issuer) confirms transaction completed")
     @PatchMapping("/orders/confirm/{id}")
     public ResponseEntity<String> transactionCompleted(@PathVariable Long id) {

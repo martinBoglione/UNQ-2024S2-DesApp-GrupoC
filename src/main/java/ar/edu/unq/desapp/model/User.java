@@ -4,11 +4,10 @@ import ar.edu.unq.desapp.model.exceptions.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 @Setter
 @Getter
@@ -17,6 +16,7 @@ import lombok.*;
 @Builder
 @Entity
 @Table(name = "users")
+@Slf4j
 public class User {
 
     @Id
@@ -42,7 +42,6 @@ public class User {
     @Column(nullable = false)
     @Size(min=6)
     private String password;
-    private static final Logger logger = Logger.getLogger(User.class.getName());
 
     @Column(nullable = false)
     @Size(min=22, max=22)
@@ -56,9 +55,7 @@ public class User {
     private boolean deleted = false;
 
     public void validateUser() {
-        if (logger.isLoggable(Level.INFO)) {
-            logger.info("Validating user with password length: " + password.length());
-        }
+        log.info("Validating user with password length: " + password.length());
 
         if(!isValidName(this.name,this.surname))  {throw new InvalidNameException();}
 
