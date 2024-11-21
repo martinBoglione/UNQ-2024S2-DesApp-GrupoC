@@ -59,7 +59,7 @@ H2: <http://localhost:8080/h2-console/>
 |Entrega Nro 3| |
 |---|---|
 |**-- Core**| :white_circle: |
-|Crear un test de arquitectura|                |
+|Crear un test de arquitectura|:green_circle:|
 |Auditoria de Web-Services. Loguear <timestamp,user,operación/metodo, parámetros, tiempoDeEjecicion> de los servicios publicados con Spring utilizando Log4j/logback|:green_circle:|
 |TAG en GitHub y Confeccionar Release Notes de entrega 3|                |
 |Configurar <https://www.baeldung.com/spring-boot-prometheus> (Metricas)|                |
