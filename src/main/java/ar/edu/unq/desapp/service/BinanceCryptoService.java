@@ -5,11 +5,13 @@ import ar.edu.unq.desapp.model.Crypto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Transactional
 @Service
 public class BinanceCryptoService {
     private RestTemplate restTemplate = new RestTemplate();

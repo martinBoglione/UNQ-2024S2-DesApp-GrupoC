@@ -22,16 +22,15 @@ public class LogExecutionTimeAspectAnnotation {
 
     @Around("@annotation(LogExecutionTime)")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
-        String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()); // Enhanced timestamp format
 
-        Object proceed;
+        Object proceedResult;
 
         long start = System.currentTimeMillis();
         try {
-            proceed = joinPoint.proceed(); // Execute the targeted method
-        } catch (Throwable throwable) {
-            log.error("Exception occurred during method execution: ", throwable);
-            throw throwable;
+            proceedResult = joinPoint.proceed(); // Execute the targeted method
+        } catch (Throwable ex) {
+            log.error("Exception occurred during method execution: ", ex);
+            throw ex;
         }
         long executionTime = System.currentTimeMillis() - start;
 
@@ -39,13 +38,12 @@ public class LogExecutionTimeAspectAnnotation {
         String operation = joinPoint.getSignature().getName();
         String parameters = getMethodParameters(joinPoint.getArgs());
 
-        // "\u001B[33m[%s] [%s] [%s] [%s] - Executed in %dms\u001B[0m"
         String logMessage = String.format(
                 "User: %s | Operation: [%s] | Params: %s | Elapsed time: %dms",
                 user, operation, parameters, executionTime);
         log.info(logMessage);
 
-        return proceed;
+        return proceedResult;
     }
 
     private String getCurrentUser() {

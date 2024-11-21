@@ -7,11 +7,13 @@ import ar.edu.unq.desapp.model.CryptoList;
 import ar.edu.unq.desapp.repositories.CryptoRepository;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+@Transactional
 @Service
 public class CryptoService {
 
