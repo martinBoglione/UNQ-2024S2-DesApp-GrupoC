@@ -4,7 +4,8 @@
 
 ## Trabajo Práctico - Crypto Exchange
 
-[![SonarCloud](https://github.com/martinBoglione/UNQ-2024S2-DesApp-GrupoC/actions/workflows/build.yml/badge.svg)](https://github.com/martinBoglione/UNQ-2024S2-DesApp-GrupoC/actions/workflows/build.yml)
+[![Java CI with Gradle](https://github.com/martinBoglione/UNQ-2024S2-DesApp-GrupoC/actions/workflows/build.yml/badge.svg)](https://github.com/martinBoglione/UNQ-2024S2-DesApp-GrupoC/actions/workflows/build.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=martinBoglione_UNQ-202402-grupoG&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=martinBoglione_UNQ-202402-grupoG)
 
 ### Grupo C
 
