@@ -1,4 +1,4 @@
-package ar.edu.unq.desapp.helpers;
+package ar.edu.unq.desapp.utilities;
 
 import ar.edu.unq.desapp.model.User;
 import ar.edu.unq.desapp.repositories.UserRepository;
