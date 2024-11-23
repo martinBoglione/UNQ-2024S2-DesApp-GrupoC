@@ -4,7 +4,9 @@
 
 ## Trabajo Práctico - Crypto Exchange
 
-[![SonarCloud](https://github.com/martinBoglione/UNQ-2024S2-DesApp-GrupoC/actions/workflows/build.yml/badge.svg)](https://github.com/martinBoglione/UNQ-2024S2-DesApp-GrupoC/actions/workflows/build.yml)
+[![Java CI with Gradle](https://github.com/martinBoglione/UNQ-2024S2-DesApp-GrupoC/actions/workflows/build.yml/badge.svg)](https://github.com/martinBoglione/UNQ-2024S2-DesApp-GrupoC/actions/workflows/build.yml) 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=martinBoglione_UNQ-202402-grupoG&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=martinBoglione_UNQ-202402-grupoG) 
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=martinBoglione_UNQ-202402-grupoG&metric=coverage)](https://sonarcloud.io/summary/new_code?id=martinBoglione_UNQ-202402-grupoG)
 
 ### Grupo C
 
@@ -21,9 +23,10 @@ H2: <http://localhost:8080/h2-console/>
 
 :green_circle: :yellow_circle: :red_circle:
 
-|Entrega Nro 1| |
+|Requerimiento|Estado|
 |---|---|
-| **-- Core**|:white_circle:|
+|:arrow_forward: :arrow_forward: :arrow_forward: **Entrega Nro** :one:| |
+|:radioactive: **Core**| |
 |Creación de repositorios GitHub|:green_circle:|
 |Configuración en GitHubActions|:green_circle:|
 |Build corriendo y SUCCESS|:green_circle:|
@@ -32,39 +35,37 @@ H2: <http://localhost:8080/h2-console/>
 |TAG en GitHub y Confeccionar Release Notes de entrega 1|:green_circle:|
 |Clean Code según la materia (todo en Ingles)|:green_circle:|
 |Configuracion de https://swagger.io/ en el back-API (v3)|:green_circle:|
-|**-- Modelo**|:white_circle:|
+|:shield: **Modelo**| |
 |Implementar modelo completo|:green_circle:|
 |Testing automático unitario según las pautas de la materia|:red_circle:|
-|**-- Funcionalidad**|:white_circle:|
+|:toolbox: **Funcionalidad**| |
 |Proveer servicio de registracion de usuario (punto 1)|:green_circle:|
-
-|Entrega Nro 2| |
-|---|-|
-|**-- Core**|:white_circle:|
+|:wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash:| |
+|:arrow_forward: :arrow_forward: :arrow_forward: **Entrega Nro** :two:| |
+|:radioactive: **Core**| |
 |Estado de build en "Verde"|:yellow_circle:|
 |Utilizar HSQLDB para persistir datos (opcion H2)|:green_circle:|
 |Crear datos de prueba cuando levanta la aplicación| |
 |Documentation de Endpoints (APIs) con Swagger (v3)|:green_circle:|
 |TAG en GitHub y Confeccionar Release Notes de entrega 2| |
-|Implementar JOB de Coverage| |
+|Implementar JOB de Coverage|:green_circle:|
 |Testing de endpoints usando Postman|:yellow_circle:|
-|**-- Funcionalidad**|:white_circle:|
+|:toolbox: **Funcionalidad**| |
 |Listar cotizacion de criptoactivos| |
 |Permitir que un usuario exprese su intención de compra/venta| |
 |Construir un listado donde se muestran las intenciones activas de compra/venta| |
 |Procesar la transacción informada por un usuario| |
 |Informar al usuario el volumen operado de cripto activos entre dos fechas| |
 |Testing integral de 2 controllers (end-to-end)| |
-
-|Entrega Nro 3| |
-|---|---|
-|**-- Core**| :white_circle: |
+|:wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash:| |
+|:arrow_forward: :arrow_forward: :arrow_forward: **Entrega Nro** :three:| |
+|:radioactive: **Core**| |
 |Crear un test de arquitectura|:green_circle:|
 |Auditoria de Web-Services. Loguear <timestamp,user,operación/metodo, parámetros, tiempoDeEjecicion> de los servicios publicados con Spring utilizando Log4j/logback|:green_circle:|
-|TAG en GitHub y Confeccionar Release Notes de entrega 3|                |
-|Configurar <https://www.baeldung.com/spring-boot-prometheus> (Metricas)|                |
-|Configurar <https://www.baeldung.com/spring-boot-actuators> (Endpoints de Monitoreo)|                |
-|**-- Funcionalidad**| :white_circle: |
-|Segurizar el acceso a la API (JWT)|                |
-|Mostrar las cotizaciones de las últimas 24hs para un cripto activo dado|                |
-|Listado de cotizaciones (alta performance - implementar cache)|                |
+|TAG en GitHub y Confeccionar Release Notes de entrega 3| |
+|Configurar <https://www.baeldung.com/spring-boot-prometheus> (Metricas)| |
+|Configurar <https://www.baeldung.com/spring-boot-actuators> (Endpoints de Monitoreo)| |
+|:toolbox: **Funcionalidad**| |
+|Segurizar el acceso a la API (JWT)| |
+|Mostrar las cotizaciones de las últimas 24hs para un cripto activo dado|:green_circle:|
+|Listado de cotizaciones (alta performance - implementar cache)| |
