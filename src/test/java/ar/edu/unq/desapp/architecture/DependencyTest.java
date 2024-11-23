@@ -7,17 +7,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.tngtech.archunit.library.Architectures.layeredArchitecture;
+import com.tngtech.archunit.lang.ArchRule;
+import com.tngtech.archunit.library.dependencies.SlicesRuleDefinition;
 
 public class DependencyTest {
-
-    private JavaClasses baseClasses;
-
-    @BeforeEach
-    public void setup() {
-        baseClasses = new ClassFileImporter()
-                .withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)
-                .importPackages("ar.edu.unq.desapp");
-    }
 
     @Test
     void layeredArchitectureShouldBeRespected(){
@@ -32,4 +25,17 @@ public class DependencyTest {
                 .whereLayer("Persistence").mayOnlyBeAccessedByLayers("Service");
     }
 
+    @Test
+    void layersShouldBeFreeOfCycles() {
+        JavaClasses projectClasses = new ClassFileImporter()
+                .withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)
+                .importPackages("ar.edu.unq.desapp");
+
+        ArchRule rule = SlicesRuleDefinition.slices()
+                .matching("ar.edu.unq.desapp.(*)..")
+                .should()
+                .beFreeOfCycles();
+
+        rule.check(projectClasses);
+    }
 }

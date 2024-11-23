@@ -23,9 +23,10 @@ H2: <http://localhost:8080/h2-console/>
 
 :green_circle: :yellow_circle: :red_circle:
 
+### :arrow_forward: :arrow_forward: **Entrega Nro** :one:
+
 |Requerimiento|Estado|
 |---|---|
-|:arrow_forward: :arrow_forward: :arrow_forward: **Entrega Nro** :one:| |
 |:radioactive: **Core**| |
 |Creación de repositorios GitHub|:green_circle:|
 |Configuración en GitHubActions|:green_circle:|
@@ -40,12 +41,15 @@ H2: <http://localhost:8080/h2-console/>
 |Testing automático unitario según las pautas de la materia|:red_circle:|
 |:toolbox: **Funcionalidad**| |
 |Proveer servicio de registracion de usuario (punto 1)|:green_circle:|
-|:wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash:| |
-|:arrow_forward: :arrow_forward: :arrow_forward: **Entrega Nro** :two:| |
+
+### :arrow_forward: :arrow_forward: **Entrega Nro** :two:
+
+|Requerimiento|Estado|
+|---|---|
 |:radioactive: **Core**| |
 |Estado de build en "Verde"|:yellow_circle:|
 |Utilizar HSQLDB para persistir datos (opcion H2)|:green_circle:|
-|Crear datos de prueba cuando levanta la aplicación| |
+|Crear datos de prueba cuando levanta la aplicación|:green_circle:|
 |Documentation de Endpoints (APIs) con Swagger (v3)|:green_circle:|
 |TAG en GitHub y Confeccionar Release Notes de entrega 2| |
 |Implementar JOB de Coverage|:green_circle:|
@@ -58,7 +62,11 @@ H2: <http://localhost:8080/h2-console/>
 |Informar al usuario el volumen operado de cripto activos entre dos fechas| |
 |Testing integral de 2 controllers (end-to-end)| |
 |:wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash:| |
-|:arrow_forward: :arrow_forward: :arrow_forward: **Entrega Nro** :three:| |
+
+### :arrow_forward: :arrow_forward: **Entrega Nro** :three:
+
+|Requerimiento|Estado|
+|---|---|
 |:radioactive: **Core**| |
 |Crear un test de arquitectura|:green_circle:|
 |Auditoria de Web-Services. Loguear <timestamp,user,operación/metodo, parámetros, tiempoDeEjecicion> de los servicios publicados con Spring utilizando Log4j/logback|:green_circle:|
