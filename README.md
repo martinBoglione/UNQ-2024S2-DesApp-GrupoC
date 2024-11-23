@@ -18,27 +18,27 @@
 Enunciado: <https://docs.google.com/document/d/1Imga3QhLWMd0fb5n8EFBmQnS7HtxFJ2sXOLgzfSEX0k/edit#heading=h.bwfobs81j2q4>
 ___
 
-Swagger: <http://localhost:8080/swagger-ui/index.html>  
+Swagger: <http://localhost:8080/swagger-ui/index.html> 
 H2: <http://localhost:8080/h2-console/>
 
 :green_circle: :yellow_circle: :red_circle:
 
 ### :arrow_forward: :arrow_forward: **Entrega Nro** :one:
 
-|Requerimiento|Estado|
-|---|---|
+|Requerimiento| Estado |
+|---|----------------|
 |:radioactive: **Core**| |
-|Creación de repositorios GitHub|:green_circle:|
-|Configuración en GitHubActions|:green_circle:|
-|Build corriendo y SUCCESS|:green_circle:|
-|SonarCloud (Registrar el proyecto Backend)|:green_circle:|
-|~~Deploy automático utlizando HEROKU o cualquiera similar para deploy Automático~~|:red_circle:|
-|TAG en GitHub y Confeccionar Release Notes de entrega 1|:green_circle:|
-|Clean Code según la materia (todo en Ingles)|:green_circle:|
+|Creación de repositorios GitHub| :green_circle: |
+|Configuración en GitHubActions| :green_circle: |
+|Build corriendo y SUCCESS| :green_circle: |
+|SonarCloud (Registrar el proyecto Backend)| :green_circle: |
+|~~Deploy automático utlizando HEROKU o cualquiera similar para deploy Automático~~| :red_circle: |
+|TAG en GitHub y Confeccionar Release Notes de entrega 1| :green_circle: |
+|Clean Code según la materia (todo en Ingles)| :green_circle: |
 |Configuracion de https://swagger.io/ en el back-API (v3)|:green_circle:|
 |:shield: **Modelo**| |
 |Implementar modelo completo|:green_circle:|
-|Testing automático unitario según las pautas de la materia|:red_circle:|
+|Testing automático unitario según las pautas de la materia|:yellow_circle:|
 |:toolbox: **Funcionalidad**| |
 |Proveer servicio de registracion de usuario (punto 1)|:green_circle:|
 
@@ -61,7 +61,6 @@ H2: <http://localhost:8080/h2-console/>
 |Procesar la transacción informada por un usuario| |
 |Informar al usuario el volumen operado de cripto activos entre dos fechas| |
 |Testing integral de 2 controllers (end-to-end)| |
-|:wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash: :wavy_dash:| |
 
 ### :arrow_forward: :arrow_forward: **Entrega Nro** :three:
 
