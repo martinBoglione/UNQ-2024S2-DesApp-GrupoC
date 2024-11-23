@@ -19,6 +19,14 @@ public class Order {
     //
     // La validación de precio y el cálculo del monto en ARS se pueden omitir hasta tener funcionando los servicios que traen los precios.
 
+
+    @PrePersist
+    public void prePersist() {
+        if (this.timestamp == null) {
+            this.timestamp = LocalDateTime.now();
+        }
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

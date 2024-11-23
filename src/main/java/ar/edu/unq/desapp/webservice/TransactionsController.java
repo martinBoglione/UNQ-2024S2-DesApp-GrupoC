@@ -1,18 +1,29 @@
 package ar.edu.unq.desapp.webservice;
 
 import ar.edu.unq.desapp.helpers.aspects.LogExecutionTime;
-import ar.edu.unq.desapp.model.Order;
+import ar.edu.unq.desapp.model.*;
+import ar.edu.unq.desapp.repositories.UserRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ar.edu.unq.desapp.service.TransactionsService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 @Tag(name = "Transactions", description = "Orders (intentions) & Operations APIs")
 public class TransactionsController {
+
+    private final TransactionsService transactionsService;
+    private final UserRepository userRepository;
+
+    public TransactionsController(TransactionsService transactionsService, UserRepository userRepository) {
+        this.transactionsService = transactionsService;
+        this.userRepository = userRepository;
+    }
 
     @LogExecutionTime
     @Operation(summary = "Get active orders")
@@ -38,17 +49,21 @@ public class TransactionsController {
     @LogExecutionTime
     @Operation(summary = "Register order")
     @PostMapping("/orders/create")
-    public Order createOrder(@RequestBody Order order) {
-        /* TODO
-        *   4. Permitir que un usuario exprese su intención de compra/venta
-            Criptoactivo
-            Cantidad nominal del Cripto Activo
-            Cotización del Cripto Activo
-            Monto de la operación en pesos ARG
-            Usuario email
-            Operación: [COMPRA|VENTA]
-        */
-        return new Order();
+    public Order createOrder(@RequestBody OrderRequestDTO orderRequest) {
+
+        User user = userRepository.findActiveUserById(orderRequest.getUserID())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Order order = Order.builder()
+                .asset(CryptoAsset.valueOf(orderRequest.getAsset()))
+                .quantity(orderRequest.getQuantity())
+                .price(orderRequest.getPrice())
+                .amountArs(orderRequest.getAmountArs())
+                .user(user)
+                .operationType(OperationType.valueOf(orderRequest.getOperationType()))
+                .build();
+
+        return this.transactionsService.createOrder(order);
     }
 
     @LogExecutionTime
