@@ -56,7 +56,7 @@ H2: <http://localhost:8080/h2-console/>
 |Testing de endpoints usando Postman|:yellow_circle:|
 |:toolbox: **Funcionalidad**| |
 |Listar cotizacion de criptoactivos| |
-|Permitir que un usuario exprese su intención de compra/venta| |
+|Permitir que un usuario exprese su intención de compra/venta|:green_circle:|
 |Construir un listado donde se muestran las intenciones activas de compra/venta| |
 |Procesar la transacción informada por un usuario| |
 |Informar al usuario el volumen operado de cripto activos entre dos fechas| |
