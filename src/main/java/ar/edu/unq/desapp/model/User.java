@@ -75,10 +75,8 @@ public class User {
     }
 
     public boolean isValidEmail(String email) {
-        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.com$";
-        Pattern pattern = Pattern.compile(emailRegex);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
+        String validationRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.com$";
+        return Pattern.compile(validationRegex).matcher(email).matches();
     }
 
     public boolean isValidAddress(String address) {
@@ -86,10 +84,8 @@ public class User {
     }
 
     public boolean isValidPassword(String password) {
-        String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\W).{6,}$";
-        Pattern pattern = Pattern.compile(passwordRegex);
-        Matcher matcher = pattern.matcher(password);
-        return matcher.matches();
+        String validationRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\W).{6,}$";
+        return Pattern.compile(validationRegex).matcher(password).matches();
     }
 
     public boolean isValidCVU(String cvu) {
