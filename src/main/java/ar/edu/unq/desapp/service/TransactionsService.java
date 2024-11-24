@@ -5,6 +5,8 @@ import ar.edu.unq.desapp.repositories.TransactionsRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Transactional
 @Service
@@ -16,7 +18,7 @@ public class TransactionsService {
         this.transactionsRepository = transactionsRepository;
     }
 
-    public Order createOrder(Order order) {
-        return transactionsRepository.save(order);
-    }
+    public List<Order> getAllOrders() { return transactionsRepository.findAllActiveOrders(); }
+
+    public Order createOrder(Order order) {return transactionsRepository.save(order); }
 }

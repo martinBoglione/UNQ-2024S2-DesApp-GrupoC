@@ -2,15 +2,22 @@ package ar.edu.unq.desapp.webservice;
 
 import ar.edu.unq.desapp.helpers.aspects.LogExecutionTime;
 import ar.edu.unq.desapp.model.*;
+import ar.edu.unq.desapp.model.DTOs.OrderRequestDTO;
+import ar.edu.unq.desapp.model.DTOs.OrderResponseDTO;
+import ar.edu.unq.desapp.model.DTOs.OrderSummaryDTO;
+import ar.edu.unq.desapp.model.DTOs.UserDTO;
 import ar.edu.unq.desapp.repositories.UserRepository;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ar.edu.unq.desapp.service.TransactionsService;
 
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -26,36 +33,43 @@ public class TransactionsController {
     }
 
     @LogExecutionTime
-    @Operation(summary = "Get active orders")
+    @Operation(summary = "Get active orders", description = "Retrieve all orders in database")
+    @ApiResponse(responseCode = "200", description = "Orders retrieved successfully", content = { @Content(schema = @Schema(implementation = Order.class), mediaType = "application/json") })
+    @ApiResponse(responseCode = "400", description = "User with ID # not found", content = { @Content(schema = @Schema()) })
+    @ApiResponse(responseCode = "500", description = "Internal server error", content = { @Content(schema = @Schema()) })
     @GetMapping("/orders")
-    public List<Order> getActiveOrders() {
-        /* TODO
-        *  5. Construir un listado donde se muestran las intenciones activas de compra/venta, es decir, las intenciones que expresan la intención de comprar o vender de un usuario.
-            Día y hora del momento en que se creó la intención de compra/venta
-            Criptoactivo
-            Cantidad nominal del Cripto Activo
-            Cotización del Cripto Activo expresa en la intención de compra/venta
-            Monto de la operación en pesos ARG
-            Usuario (Nombre/Apellido)
-            Cantidad de operaciones (realizadas por el usuario)
-            Reputación, se calcula como cantidad de puntos otorgados / cantidad de operaciones. Si la persona no ha operado se muestra “Sin operaciones”.
-            Direccion de envio:
-                Si la operación es venta, debe mostrar un CVU para que el usuario 2 haga la transferencia
-                Si la operación es compra,  debe mostrar la dirección de la billetera de CriptoActivos
-         */
-        return List.of();
+    public List<OrderSummaryDTO> getActiveOrders() {
+
+        List<Order> activeOrders = this.transactionsService.getAllOrders();
+
+        return activeOrders.stream()
+                .map(order -> new OrderSummaryDTO(
+                        order.getTimestamp(),
+                        order.getAsset(),
+                        order.getQuantity(),
+                        order.getPrice(),
+                        order.getAmountArs(),
+                        new UserDTO(
+                                order.getUser().getName(),
+                                order.getUser().getSurname(),
+                                // TODO: Cambiar reputation y operationsQuantity para que no esten hardcodeados
+                                0,
+                                0
+                        )
+                ))
+                .collect(Collectors.toList());
     }
 
     @LogExecutionTime
     @Operation(summary = "Register order")
     @PostMapping("/orders/create")
-    public Order createOrder(@RequestBody OrderRequestDTO orderRequest) {
+    public OrderResponseDTO createOrder(@RequestBody OrderRequestDTO orderRequest) {
 
         User user = userRepository.findActiveUserById(orderRequest.getUserID())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         Order order = Order.builder()
-                .asset(CryptoAsset.valueOf(orderRequest.getAsset()))
+                .asset(orderRequest.getAsset())
                 .quantity(orderRequest.getQuantity())
                 .price(orderRequest.getPrice())
                 .amountArs(orderRequest.getAmountArs())
@@ -63,7 +77,17 @@ public class TransactionsController {
                 .operationType(OperationType.valueOf(orderRequest.getOperationType()))
                 .build();
 
-        return this.transactionsService.createOrder(order);
+        Order savedOrder = this.transactionsService.createOrder(order);
+
+        return new OrderResponseDTO(
+                savedOrder.getAsset().toString(),
+                savedOrder.getQuantity(),
+                savedOrder.getPrice(),
+                savedOrder.getAmountArs(),
+                savedOrder.getOperationType().toString(),
+                user.getName(),
+                user.getSurname()
+        );
     }
 
     @LogExecutionTime

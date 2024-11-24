@@ -4,7 +4,6 @@ import ar.edu.unq.desapp.model.exceptions.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -53,6 +52,21 @@ public class User {
 
     @Column(nullable = false)
     private boolean deleted = false;
+
+    /*
+    TODO: El usaurio deberia tener la cantidad de operaciones
+     */
+//    @Column(nullable = false)
+//    private Integer operationsQuantity = 0;
+
+    /*
+    TODO: El usaurio deberia tener la reputacion
+            Se calcula como cantidad de puntos otorgados / cantidad de operaciones.
+            Si la persona no ha operado se muestra “Sin operaciones”
+     */
+//    @Column(nullable = false)
+//    private Integer reputation = 0;
+
 
     public void validateUser() {
         log.info("Validating user with password length: " + password.length());
