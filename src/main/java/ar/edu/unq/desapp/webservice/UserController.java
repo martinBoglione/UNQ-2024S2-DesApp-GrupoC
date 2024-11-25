@@ -1,6 +1,7 @@
 package ar.edu.unq.desapp.webservice;
 
 import ar.edu.unq.desapp.helpers.aspects.LogExecutionTime;
+import ar.edu.unq.desapp.model.DTOs.UserDTO;
 import ar.edu.unq.desapp.model.User;
 import ar.edu.unq.desapp.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 import java.util.List;
 import java.time.LocalDate;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -77,12 +79,17 @@ public class UserController {
     @LogExecutionTime
     @Operation(summary = "Users list with reputation")
     @GetMapping("/users/all-with-reputation")
-    public ResponseEntity<String> getAllUsersWithReputation() {
-        /* TODO
-        *   Listado de usuarios de la plataforma
-            Nombre, Apellido, Cantidad Operaciones, Reputación
-            */
-        return ResponseEntity.ok("ok");
+    public List<UserDTO> getAllUsersWithReputation() {
+        List<User> activeUsers = this.userService.getAllUsers();
+
+        return activeUsers.stream()
+                .map(user -> new UserDTO(
+                        user.getName(),
+                        user.getSurname(),
+                        user.getOperationsQuantity(),
+                        user.getReputation()
+                ))
+                .collect(Collectors.toList());
     }
 
 }
