@@ -5,6 +5,7 @@ import ar.edu.unq.desapp.repositories.TransactionsRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -19,6 +20,10 @@ public class TransactionsService {
     }
 
     public List<Order> getAllOrders() { return transactionsRepository.findAllActiveOrders(); }
+
+    public List<Order> getOrdersByUserAndDateRange(Long userId, LocalDate fromDate, LocalDate toDate) {
+        return transactionsRepository.findByUserIdAndDateRange(userId, fromDate.atStartOfDay(), toDate.atTime(23, 59, 59));
+    }
 
     public Order createOrder(Order order) {return transactionsRepository.save(order); }
 }

@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ar.edu.unq.desapp.service.TransactionsService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,9 +53,8 @@ public class TransactionsController {
                         new UserDTO(
                                 order.getUser().getName(),
                                 order.getUser().getSurname(),
-                                // TODO: Cambiar reputation y operationsQuantity para que no esten hardcodeados
-                                0,
-                                0
+                                order.getUser().getReputation(),
+                                order.getUser().getOperationsQuantity()
                         )
                 ))
                 .collect(Collectors.toList());
@@ -129,4 +129,7 @@ public class TransactionsController {
         return ResponseEntity.ok("ok");
     }
 
+    public List<Order> getOrdersByUserAndDateRange(Long userId, LocalDate fromDate, LocalDate toDate) {
+        return this.transactionsService.getOrdersByUserAndDateRange(userId, fromDate, toDate);
+    }
 }
