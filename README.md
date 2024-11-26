@@ -48,7 +48,7 @@ H2: <http://localhost:8080/h2-console/>
 |Requerimiento|Estado|
 |---|---|
 |:radioactive: **Core**| |
-|Estado de build en "Verde"|:yellow_circle:|
+|Estado de build en "Verde"|:green_circle:|
 |Utilizar HSQLDB para persistir datos (opcion H2)|:green_circle:|
 |Crear datos de prueba cuando levanta la aplicación|:green_circle:|
 |Documentation de Endpoints (APIs) con Swagger (v3)|:green_circle:|
@@ -65,15 +65,15 @@ H2: <http://localhost:8080/h2-console/>
 
 ### :arrow_forward: :arrow_forward: **Entrega Nro** :three:
 
-|Requerimiento|Estado|
-|---|---|
-|:radioactive: **Core**| |
-|Crear un test de arquitectura|:green_circle:|
-|Auditoria de Web-Services. Loguear <timestamp,user,operación/metodo, parámetros, tiempoDeEjecicion> de los servicios publicados con Spring utilizando Log4j/logback|:green_circle:|
-|TAG en GitHub y Confeccionar Release Notes de entrega 3| |
-|Configurar <https://www.baeldung.com/spring-boot-prometheus> (Metricas)|:green_circle:|
-|Configurar <https://www.baeldung.com/spring-boot-actuators> (Endpoints de Monitoreo)|:green_circle:|
-|:toolbox: **Funcionalidad**| |
-|Segurizar el acceso a la API (JWT)|:green_circle:|
-|Mostrar las cotizaciones de las últimas 24hs para un cripto activo dado|:green_circle:|
-|Listado de cotizaciones (alta performance - implementar cache)| |
+|Requerimiento| Estado         |
+|---|----------------|
+|:radioactive: **Core**|                |
+|Crear un test de arquitectura| :green_circle: |
+|Auditoria de Web-Services. Loguear <timestamp,user,operación/metodo, parámetros, tiempoDeEjecicion> de los servicios publicados con Spring utilizando Log4j/logback| :green_circle: |
+|TAG en GitHub y Confeccionar Release Notes de entrega 3|:green_circle:|
+|Configurar <https://www.baeldung.com/spring-boot-prometheus> (Metricas)| :green_circle: |
+|Configurar <https://www.baeldung.com/spring-boot-actuators> (Endpoints de Monitoreo)| :green_circle: |
+|:toolbox: **Funcionalidad**|                |
+|Segurizar el acceso a la API (JWT)| :green_circle: |
+|Mostrar las cotizaciones de las últimas 24hs para un cripto activo dado| :green_circle: |
+|Listado de cotizaciones (alta performance - implementar cache)| :red_circle:   |

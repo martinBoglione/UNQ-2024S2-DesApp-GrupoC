@@ -27,7 +27,7 @@ public class LogExecutionTimeAspectAnnotation {
 
         long start = System.currentTimeMillis();
         try {
-            proceedResult = joinPoint.proceed(); // Execute the targeted method
+            proceedResult = joinPoint.proceed();
         } catch (Throwable ex) {
             log.error("Exception occurred during method execution: ", ex);
             throw ex;
@@ -47,16 +47,7 @@ public class LogExecutionTimeAspectAnnotation {
     }
 
     private String getCurrentUser() {
-        /* TODO
-        descomentar cuando esté implementada la seguridad
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.isAuthenticated()) {
-            return authentication.getName();
-        }
-         */
-
-        return "anonymous";
+         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
     private String getMethodParameters(Object[] args) {
