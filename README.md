@@ -18,7 +18,8 @@
 Enunciado: <https://docs.google.com/document/d/1Imga3QhLWMd0fb5n8EFBmQnS7HtxFJ2sXOLgzfSEX0k/edit#heading=h.bwfobs81j2q4>
 ___
 
-Swagger: <http://localhost:8080/swagger-ui/index.html> 
+Swagger: <http://localhost:8080/swagger-ui/index.html>  
+Actuator: <http://localhost:8080/actuator>  
 H2: <http://localhost:8080/h2-console/>
 
 :green_circle: :yellow_circle: :red_circle:
@@ -71,7 +72,7 @@ H2: <http://localhost:8080/h2-console/>
 |Auditoria de Web-Services. Loguear <timestamp,user,operación/metodo, parámetros, tiempoDeEjecicion> de los servicios publicados con Spring utilizando Log4j/logback|:green_circle:|
 |TAG en GitHub y Confeccionar Release Notes de entrega 3| |
 |Configurar <https://www.baeldung.com/spring-boot-prometheus> (Metricas)| |
-|Configurar <https://www.baeldung.com/spring-boot-actuators> (Endpoints de Monitoreo)| |
+|Configurar <https://www.baeldung.com/spring-boot-actuators> (Endpoints de Monitoreo)|:green_circle:|
 |:toolbox: **Funcionalidad**| |
 |Segurizar el acceso a la API (JWT)|:yellow_circle:|
 |Mostrar las cotizaciones de las últimas 24hs para un cripto activo dado|:green_circle:|
