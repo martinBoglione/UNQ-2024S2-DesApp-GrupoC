@@ -36,9 +36,14 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
+	// JWT
 	implementation 'io.jsonwebtoken:jjwt-jackson:0.12.6'
 	implementation 'io.jsonwebtoken:jjwt-impl:0.12.6'
 	compileOnly  'io.jsonwebtoken:jjwt-api:0.12.6'
+
+	// actuator & micrometer prometheus
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '3.4.0'
+	implementation 'io.micrometer:micrometer-registry-prometheus:1.14.1'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'

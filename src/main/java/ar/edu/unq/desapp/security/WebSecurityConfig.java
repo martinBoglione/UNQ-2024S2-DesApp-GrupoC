@@ -56,7 +56,8 @@ public class WebSecurityConfig {
             "/api/auth/**",
             "/swagger-ui/**",
             "/v3/api-docs/**",
-            "/h2-console/**"
+            "/h2-console/**",
+            "/actuator/**"
     };
 
     @Bean
