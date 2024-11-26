@@ -59,7 +59,7 @@ H2: <http://localhost:8080/h2-console/>
 |Permitir que un usuario exprese su intención de compra/venta|:green_circle:|
 |Construir un listado donde se muestran las intenciones activas de compra/venta|:green_circle:|
 |Procesar la transacción informada por un usuario| |
-|Informar al usuario el volumen operado de cripto activos entre dos fechas| |
+|Informar al usuario el volumen operado de cripto activos entre dos fechas|:yellow_circle:|
 |Testing integral de 2 controllers (end-to-end)| |
 
 ### :arrow_forward: :arrow_forward: **Entrega Nro** :three:
