@@ -56,18 +56,18 @@ public class User {
 
 
     /*
-    TODO: El usaurio deberia tener la cantidad de operaciones
+    TODO: El usuario deberia tener la cantidad de operaciones
      */
-//    @Column(nullable = false)
-//    private Integer operationsQuantity = 0;
+    @Column(nullable = false)
+    private Integer operationsQuantity = 0;
 
     /*
-    TODO: El usaurio deberia tener la reputacion
+    TODO: El usuario deberia tener la reputacion
             Se calcula como cantidad de puntos otorgados / cantidad de operaciones.
             Si la persona no ha operado se muestra “Sin operaciones”
      */
-//    @Column(nullable = false)
-//    private Integer reputation = 0;
+    @Column(nullable = false)
+    private Integer reputation = 0;
 
 
     public void validateUser() {
