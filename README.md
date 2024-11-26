@@ -59,7 +59,7 @@ H2: <http://localhost:8080/h2-console/>
 |Listar cotizacion de criptoactivos|:yellow_circle:|
 |Permitir que un usuario exprese su intención de compra/venta|:green_circle:|
 |Construir un listado donde se muestran las intenciones activas de compra/venta|:green_circle:|
-|Procesar la transacción informada por un usuario|:red_circle:|
+|Procesar la transacción informada por un usuario|:yellow_circle:|
 |Informar al usuario el volumen operado de cripto activos entre dos fechas|:yellow_circle:|
 |Testing integral de 2 controllers (end-to-end)|:red_circle:|
 
