@@ -51,16 +51,16 @@ H2: <http://localhost:8080/h2-console/>
 |Utilizar HSQLDB para persistir datos (opcion H2)|:green_circle:|
 |Crear datos de prueba cuando levanta la aplicación|:green_circle:|
 |Documentation de Endpoints (APIs) con Swagger (v3)|:green_circle:|
-|TAG en GitHub y Confeccionar Release Notes de entrega 2| |
+|TAG en GitHub y Confeccionar Release Notes de entrega 2|:green_circle:|
 |Implementar JOB de Coverage|:green_circle:|
 |Testing de endpoints usando Postman|:yellow_circle:|
 |:toolbox: **Funcionalidad**| |
 |Listar cotizacion de criptoactivos|:yellow_circle:|
 |Permitir que un usuario exprese su intención de compra/venta|:green_circle:|
 |Construir un listado donde se muestran las intenciones activas de compra/venta|:green_circle:|
-|Procesar la transacción informada por un usuario| |
+|Procesar la transacción informada por un usuario|:red_circle:|
 |Informar al usuario el volumen operado de cripto activos entre dos fechas|:yellow_circle:|
-|Testing integral de 2 controllers (end-to-end)| |
+|Testing integral de 2 controllers (end-to-end)|:red_circle:|
 
 ### :arrow_forward: :arrow_forward: **Entrega Nro** :three:
 

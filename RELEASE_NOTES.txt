@@ -1,4 +1,27 @@
 ---------------------------------------------------------------------
+TAG v2.0.0
+---------------------------------------------------------------------
+NEW FEATURES (lo que están entregando y está funcionando):
+* Documentación de API con Swagger
+* Datos generados al levantar la aplicación
+* Coverage con JaCoCo a través de SonarCloud
+* Testing de endpoints usando Postman
+* WS para expresar intención de compra/venta
+* WS que muestra las intenciones activas de compra/venta
+* WS que muestra cotizaciones de criptoactivos
+* WS que muestra el volumen operado por un usuario
+
+NOTES (ej: funcionalidad que falta, alguna consideración especial):
+* Falta procesar la transacción informada por un usuario
+* Falta el testing end-to-end de dos controllers
+
+KNOWN ISSUES (ej: funcionalidad que saben que están funcionando diferente, algún error conocido en la funcionalidad terminada, etc) :
+* El build no pasa siempre en verde (falta coverage)
+* Falta agregar pruebas con Postman
+* El volumen operado y el listado de cotizaciones podrían mejorarse (revisar los DTOs)
+
+
+---------------------------------------------------------------------
 TAG v1.0.0
 ---------------------------------------------------------------------
 NEW FEATURES (lo que están entregando y está funcionando):
