@@ -1,7 +1,6 @@
 package ar.edu.unq.desapp.security;
 
-import ar.edu.unq.desapp.service.UserDetailsServiceImpl;
-import lombok.AllArgsConstructor;
+import ar.edu.unq.desapp.service.CustomUserDetailsService;
 import org.springframework.stereotype.Component;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -20,9 +19,9 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
-    private final UserDetailsServiceImpl userDetailsService;
+    private final CustomUserDetailsService userDetailsService;
 
-    public JwtAuthenticationFilter(JwtUtil jwtUtil, UserDetailsServiceImpl userDetailsService) {
+    public JwtAuthenticationFilter(JwtUtil jwtUtil, CustomUserDetailsService userDetailsService) {
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
     }

@@ -6,13 +6,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import ar.edu.unq.desapp.model.DTOs.LoginUserDto;
-import ar.edu.unq.desapp.model.User;
 
 @Service
 @AllArgsConstructor
 public class AuthenticationService {
 
-    private UserDetailsServiceImpl userDetailsService;
+    private CustomUserDetailsService userDetailsService;
 
     private AuthenticationManager authenticationManager;
 

@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "678fba35-eccb-47ef-ac5c-597c9334496b",
+		"_postman_id": "a4aa58de-21fb-486c-a62f-0525683bcac6",
 		"name": "Dev App",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "11668063"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38410548"
 	},
 	"item": [
 		{
@@ -12,9 +12,31 @@
 				{
 					"name": "Get All Users",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJub29ic2FpYm90QG1vcnRhbGtvbWJhdC5jb20iLCJpYXQiOjE3MzI1OTQyNTAsImV4cCI6MTczMjU5NDg1MH0.RzkUVEkLe8P8J-C1F5E5G-ElyYcAMcNqScZAWor4zNQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/api/users/all"
+						"url": {
+							"raw": "http://localhost:8080/api/users/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"all"
+							]
+						}
 					},
 					"response": []
 				},
@@ -23,7 +45,19 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/api/users/all-with-reputation"
+						"url": {
+							"raw": "http://localhost:8080/api/users/all-with-reputation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"all-with-reputation"
+							]
+						}
 					},
 					"response": []
 				},
@@ -32,7 +66,19 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/api/users/1"
+						"url": {
+							"raw": "http://localhost:8080/api/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -41,7 +87,19 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:8080/api/users/1"
+						"url": {
+							"raw": "http://localhost:8080/api/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -59,7 +117,19 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/api/users/create"
+						"url": {
+							"raw": "http://localhost:8080/api/users/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"create"
+							]
+						}
 					},
 					"response": []
 				},
@@ -108,7 +178,18 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/api/quotes"
+						"url": {
+							"raw": "http://localhost:8080/api/quotes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"quotes"
+							]
+						}
 					},
 					"response": []
 				},
@@ -117,7 +198,19 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/api/quotes/latest"
+						"url": {
+							"raw": "http://localhost:8080/api/quotes/latest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"quotes",
+								"latest"
+							]
+						}
 					},
 					"response": []
 				},
@@ -126,7 +219,19 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/api/quotes/CAKEUSDT"
+						"url": {
+							"raw": "http://localhost:8080/api/quotes/CAKEUSDT",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"quotes",
+								"CAKEUSDT"
+							]
+						}
 					},
 					"response": []
 				},
@@ -135,7 +240,20 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/api/quotes/24h/CAKEUSDT"
+						"url": {
+							"raw": "http://localhost:8080/api/quotes/24h/CAKEUSDT",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"quotes",
+								"24h",
+								"CAKEUSDT"
+							]
+						}
 					},
 					"response": []
 				}
@@ -149,7 +267,18 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/api/orders"
+						"url": {
+							"raw": "http://localhost:8080/api/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders"
+							]
+						}
 					},
 					"response": []
 				},
@@ -158,7 +287,20 @@
 					"request": {
 						"method": "PATCH",
 						"header": [],
-						"url": "http://localhost:8080/api/orders/cancel/54"
+						"url": {
+							"raw": "http://localhost:8080/api/orders/cancel/54",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"cancel",
+								"54"
+							]
+						}
 					},
 					"response": []
 				},
@@ -176,7 +318,19 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/api/orders/create"
+						"url": {
+							"raw": "http://localhost:8080/api/orders/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"create"
+							]
+						}
 					},
 					"response": []
 				},
@@ -194,7 +348,19 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/api/orders/create"
+						"url": {
+							"raw": "http://localhost:8080/api/orders/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"create"
+							]
+						}
 					},
 					"response": []
 				},
@@ -212,7 +378,20 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/api/orders/fill/{id}"
+						"url": {
+							"raw": "http://localhost:8080/api/orders/fill/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"fill",
+								"{id}"
+							]
+						}
 					},
 					"response": []
 				},
@@ -230,7 +409,58 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/api/orders/confirm/{id}"
+						"url": {
+							"raw": "http://localhost:8080/api/orders/confirm/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"confirm",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "User login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"scorpion@mortalkombat.com\",\n  \"password\": \"Maradona10!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
 					},
 					"response": []
 				}
