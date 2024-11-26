@@ -47,16 +47,7 @@ public class LogExecutionTimeAspectAnnotation {
     }
 
     private String getCurrentUser() {
-        /* TODO
-        descomentar cuando esté implementada la seguridad
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.isAuthenticated()) {
-            return authentication.getName();
-        }
-         */
-
-        return "anonymous";
+         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
     private String getMethodParameters(Object[] args) {

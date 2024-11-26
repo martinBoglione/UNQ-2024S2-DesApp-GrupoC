@@ -39,6 +39,6 @@ scrape_configs:
     - localhost:9090
 - job_name: 'Crypto Exchange spring-boot-application'
   metrics_path: '/actuator/prometheus'
-  scrape_interval: 15s # This can be adjusted based on our needs
+  scrape_interval: 10s # This can be adjusted based on our needs
   static_configs:
   - targets: ['host.docker.internal:8080']
