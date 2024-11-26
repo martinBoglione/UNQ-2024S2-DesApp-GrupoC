@@ -51,7 +51,9 @@ public class User {
     private String walletAddress;
 
     @Column(nullable = false)
+    @Builder.Default
     private boolean deleted = false;
+
 
     /*
     TODO: El usaurio deberia tener la cantidad de operaciones
