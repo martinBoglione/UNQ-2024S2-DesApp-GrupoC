@@ -30,7 +30,7 @@ public class User {
     @Size(min=3, max=30)
     private String surname;
 
-    @Column(nullable = false)
+    @Column(unique=true, nullable = false)
     @Email(message = "Invalid email format.")
     private String email;
 
@@ -51,12 +51,15 @@ public class User {
     private String walletAddress;
 
     @Column(nullable = false)
+    @Builder.Default
     private boolean deleted = false;
+
 
     /*
     TODO: El usuario deberia tener la cantidad de operaciones
      */
     @Column(nullable = false)
+    @Builder.Default
     private Integer operationsQuantity = 0;
 
     /*
@@ -65,6 +68,7 @@ public class User {
             Si la persona no ha operado se muestra “Sin operaciones”
      */
     @Column(nullable = false)
+    @Builder.Default
     private Integer reputation = 0;
 
 

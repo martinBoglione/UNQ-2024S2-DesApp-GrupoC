@@ -73,6 +73,6 @@ H2: <http://localhost:8080/h2-console/>
 |Configurar <https://www.baeldung.com/spring-boot-prometheus> (Metricas)| |
 |Configurar <https://www.baeldung.com/spring-boot-actuators> (Endpoints de Monitoreo)| |
 |:toolbox: **Funcionalidad**| |
-|Segurizar el acceso a la API (JWT)| |
+|Segurizar el acceso a la API (JWT)|:yellow_circle:|
 |Mostrar las cotizaciones de las últimas 24hs para un cripto activo dado|:green_circle:|
 |Listado de cotizaciones (alta performance - implementar cache)| |
