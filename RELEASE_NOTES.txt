@@ -1,4 +1,24 @@
 ---------------------------------------------------------------------
+TAG v3.0.0
+---------------------------------------------------------------------
+NEW FEATURES (lo que están entregando y está funcionando):
+* Seguridad con JWT
+* WS para mostrar las cotizaciones de las últimas 24hs para un cripto activo dado
+* Crear un test de arquitectura
+* Auditoria de Web-Services con aspecto y Logback
+* Métricas y monitoreo con Actuators y Prometheus
+
+NOTES (ej: funcionalidad que falta, alguna consideración especial):
+* Implementar caché en servicio de cotizaciones
+* Completar workflow operativo, implementando validaciones de negocio
+* Agregar tests de integración de endpoints
+
+KNOWN ISSUES (ej: funcionalidad que saben que están funcionando diferente, algún error conocido en la funcionalidad terminada, etc) :
+* Mejorar coverage
+* Agregar casos de prueba en Postman
+
+
+---------------------------------------------------------------------
 TAG v2.0.0
 ---------------------------------------------------------------------
 NEW FEATURES (lo que están entregando y está funcionando):

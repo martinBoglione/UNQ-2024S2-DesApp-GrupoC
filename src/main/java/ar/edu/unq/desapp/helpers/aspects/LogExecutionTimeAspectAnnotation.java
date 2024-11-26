@@ -27,7 +27,7 @@ public class LogExecutionTimeAspectAnnotation {
 
         long start = System.currentTimeMillis();
         try {
-            proceedResult = joinPoint.proceed(); // Execute the targeted method
+            proceedResult = joinPoint.proceed();
         } catch (Throwable ex) {
             log.error("Exception occurred during method execution: ", ex);
             throw ex;
