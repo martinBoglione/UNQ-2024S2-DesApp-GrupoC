@@ -12,7 +12,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ar.edu.unq.desapp.service.TransactionsService;
 
@@ -65,6 +64,12 @@ public class TransactionsController {
     @PostMapping("/orders/create")
     public OrderResponseDTO createOrder(@RequestBody OrderRequestDTO orderRequest) {
 
+        /* TODO
+            Direccion de envio: Depende del orderRequest.getOperationType()?
+            Si la operación es venta, debe mostrar un CVU para que el usuario 2 haga la transferencia
+            Si la operación es compra,  debe mostrar la dirección de la billetera de CriptoActivos
+         */
+
         User user = userRepository.findActiveUserById(orderRequest.getUserID())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -95,38 +100,34 @@ public class TransactionsController {
     @PatchMapping("/orders/cancel/{id}")
     public void cancelOrder(@PathVariable Long id) {
         /* TODO
-          Revisar que sea el método HTTP correcto.
-          Cancela una orden activa
+            Agregar logica de resta o suma de reputacion
+            Agregar logica de cancel by system
         * */
-        return;
+        transactionsService.cancelOrder(id);
     }
 
     @LogExecutionTime
     @Operation(summary = "User (counterparty) wants to fill an order (transact)")
     @PostMapping("/orders/fill/{id}")
-    public ResponseEntity<String> fillOrder(@PathVariable Long id) {
+    public void fillOrder(@PathVariable Long id) {
         /* TODO
             Se busca la orden {id}, si pasa los controles se crea una Transaction, y se cambia el estado de la orden.
-
-        	6. Procesar la transacción informada por un usuario
-            Definir bien qué campos deberían estar en el body (lo que dice el punto 6 está mal).
+            Agregar logica
         * */
 
-        return ResponseEntity.ok("ok");
+        transactionsService.fillOrder(id);
     }
 
     @LogExecutionTime
     @Operation(summary = "User (issuer) confirms transaction completed")
     @PatchMapping("/orders/confirm/{id}")
-    public ResponseEntity<String> transactionCompleted(@PathVariable Long id) {
+    public void transactionCompleted(@PathVariable Long id) {
         /* TODO
             Se busca la Transaction con {id} y se confirma junto con la orden asociada.
-
-        	6. Procesar la transacción informada por un usuario
-            Definir bien qué campos deberían estar en el body (lo que dice el punto 6 está mal).
+            Agregar logica
         * */
 
-        return ResponseEntity.ok("ok");
+        transactionsService.confirmOrder(id);
     }
 
     public List<Order> getOrdersByUserAndDateRange(Long userId, LocalDate fromDate, LocalDate toDate) {

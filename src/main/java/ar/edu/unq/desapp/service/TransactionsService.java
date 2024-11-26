@@ -26,4 +26,10 @@ public class TransactionsService {
     }
 
     public Order createOrder(Order order) {return transactionsRepository.save(order); }
+
+    public void cancelOrder(Long id) { transactionsRepository.cancelOrder(id);}
+
+    public void fillOrder(Long id) { transactionsRepository.fillOrder(id);}
+
+    public void confirmOrder(Long id) { transactionsRepository.confirmOrder(id);}
 }
