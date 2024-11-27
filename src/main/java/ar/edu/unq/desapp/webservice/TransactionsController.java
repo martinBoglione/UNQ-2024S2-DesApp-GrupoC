@@ -2,10 +2,10 @@ package ar.edu.unq.desapp.webservice;
 
 import ar.edu.unq.desapp.helpers.aspects.LogExecutionTime;
 import ar.edu.unq.desapp.model.*;
-import ar.edu.unq.desapp.model.DTOs.OrderRequestDTO;
-import ar.edu.unq.desapp.model.DTOs.OrderResponseDTO;
-import ar.edu.unq.desapp.model.DTOs.OrderSummaryDTO;
-import ar.edu.unq.desapp.model.DTOs.UserDTO;
+import ar.edu.unq.desapp.model.dto.OrderRequestDTO;
+import ar.edu.unq.desapp.model.dto.OrderResponseDTO;
+import ar.edu.unq.desapp.model.dto.OrderSummaryDTO;
+import ar.edu.unq.desapp.model.dto.UserDTO;
 import ar.edu.unq.desapp.repositories.UserRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

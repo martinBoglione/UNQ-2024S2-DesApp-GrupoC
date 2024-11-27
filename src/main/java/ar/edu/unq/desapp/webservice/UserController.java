@@ -2,7 +2,7 @@ package ar.edu.unq.desapp.webservice;
 
 import ar.edu.unq.desapp.helpers.aspects.LogExecutionTime;
 import ar.edu.unq.desapp.model.Crypto;
-import ar.edu.unq.desapp.model.DTOs.UserDTO;
+import ar.edu.unq.desapp.model.dto.UserDTO;
 import ar.edu.unq.desapp.model.Order;
 import ar.edu.unq.desapp.model.User;
 import ar.edu.unq.desapp.service.UserService;

@@ -1,4 +1,4 @@
-package ar.edu.unq.desapp.model.DTOs;
+package ar.edu.unq.desapp.model.dto;
 
 public record LoginResponseDto(String token, long expiresIn) {
 }

@@ -1,9 +1,8 @@
 package ar.edu.unq.desapp.webservice;
 
 import ar.edu.unq.desapp.helpers.aspects.LogExecutionTime;
-import ar.edu.unq.desapp.model.DTOs.LoginResponseDto;
-import ar.edu.unq.desapp.model.DTOs.LoginUserDto;
-import ar.edu.unq.desapp.model.exceptions.UserNotFoundException;
+import ar.edu.unq.desapp.model.dto.LoginResponseDto;
+import ar.edu.unq.desapp.model.dto.LoginUserDto;
 import ar.edu.unq.desapp.security.JwtUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -11,10 +10,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

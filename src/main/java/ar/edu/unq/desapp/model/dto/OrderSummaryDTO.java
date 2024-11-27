@@ -1,4 +1,4 @@
-package ar.edu.unq.desapp.model.DTOs;
+package ar.edu.unq.desapp.model.dto;
 
 import ar.edu.unq.desapp.model.CryptoAsset;
 import lombok.Getter;
