@@ -25,7 +25,7 @@ public class CryptoService {
         this.binanceCryptoService = binanceCryptoService;
     }
 
-
+    @Cacheable(value = "cacheCrypto")
     public CryptoList getAllCryptoPrices() {
         CryptoList list = new CryptoList();
         for (CryptoAsset crypto : CryptoAsset.values()) {
@@ -41,7 +41,7 @@ public class CryptoService {
     }
 
 
-    @Cacheable(value = "cryptoCache", key = "#symbol")
+    @Cacheable(value = "cacheCrypto")
     public Crypto getCryptoValue(String symbol) {
         Crypto entity = binanceCryptoService.getCryptoCurrencyValue(symbol);
 
