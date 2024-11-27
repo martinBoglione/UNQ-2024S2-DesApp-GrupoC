@@ -76,4 +76,4 @@ H2: <http://localhost:8080/h2-console/>
 |:toolbox: **Funcionalidad**|                |
 |Segurizar el acceso a la API (JWT)| :green_circle: |
 |Mostrar las cotizaciones de las últimas 24hs para un cripto activo dado| :green_circle: |
-|Listado de cotizaciones (alta performance - implementar cache)| :red_circle:   |
+|Listado de cotizaciones (alta performance - implementar cache)| :green_circle: |
