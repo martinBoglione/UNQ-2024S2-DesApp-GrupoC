@@ -49,11 +49,6 @@ public class QuotesController {
     @Operation(summary = "Get cached quotes (fast response)")
     @GetMapping("/quotes")
     public ResponseEntity<CryptoList> getAllCryptoCurrencyPrices() {
-        /* TODO
-        *   B. Listado de cotizaciones (precio cada 10 minutos)
-            Cripto Activo, precio, hora de actualizaciòn
-            El servicio B debe poder contestar en el orden de los milisegundos y puede contener valores no actualizados.
-        */
         CryptoList list = cryptoService.getAllCryptoPrices();
         return ResponseEntity.ok().body(list);
     }

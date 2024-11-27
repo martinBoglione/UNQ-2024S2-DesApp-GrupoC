@@ -68,14 +68,14 @@ public class UserController {
     @Operation(summary = "Operated volume between dates range for user")
     @GetMapping("/users/report")
     public ResponseEntity<String> reportOperatedVolume(@RequestParam Long id, @RequestParam LocalDate fromDate, @RequestParam LocalDate toDate) {
-
+        // TODO Retornar un JSON
         List<Order> userOrders = this.transactionsController.getOrdersByUserAndDateRange(id, fromDate, toDate);
 
         if (userOrders.isEmpty()) {
             return ResponseEntity.ok("No se encontraron órdenes en el rango de fechas especificado.");
         }
 
-        // Valor del dólar (esto debería ser configurable o traído de un servicio)
+        // TODO Valor del dólar (esto debería ser configurable o traído de un servicio)
         final double dollarValue = 1300;
 
         double totalVolumeInDollars = 0.0;
@@ -98,7 +98,6 @@ public class UserController {
             totalVolumeInPesos += orderValueInPesos;
             totalVolumeInDollars += orderValueInDollars;
 
-            // Añadir detalles de la orden al reporte
             reportBuilder.append("Criptoactivo: ").append(order.getAsset()).append("\n")
                     .append("Cantidad nominal: ").append(order.getQuantity()).append("\n")
                     .append("Cotización actual (USD): ").append(currentCryptoValue).append("\n")

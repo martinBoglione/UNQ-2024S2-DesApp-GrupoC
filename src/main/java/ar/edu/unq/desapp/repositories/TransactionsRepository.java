@@ -17,7 +17,6 @@ public interface TransactionsRepository extends JpaRepository<Order,Long> {
     @Query("SELECT o FROM Order o WHERE o.status = 'active'")
     List<Order> findAllActiveOrders();
 
-    //TODO: Cambiar ACTIVE por FILLED
     @Query("SELECT o FROM Order o WHERE o.user.id = :userId AND o.timestamp BETWEEN :fromDate AND :toDate AND o.status = 'ACTIVE'")
     List<Order> findByUserIdAndDateRange(@Param("userId") Long userId,
                                          @Param("fromDate") LocalDateTime fromDate,
