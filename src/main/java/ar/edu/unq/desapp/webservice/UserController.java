@@ -2,10 +2,14 @@ package ar.edu.unq.desapp.webservice;
 
 import ar.edu.unq.desapp.helpers.aspects.LogExecutionTime;
 import ar.edu.unq.desapp.model.Crypto;
+import ar.edu.unq.desapp.model.dto.OperatedVolumeReportDTO;
+import ar.edu.unq.desapp.model.dto.OrderReportDetailDTO;
 import ar.edu.unq.desapp.model.dto.UserDTO;
 import ar.edu.unq.desapp.model.Order;
 import ar.edu.unq.desapp.model.User;
+import ar.edu.unq.desapp.service.UsdService;
 import ar.edu.unq.desapp.service.UserService;
+import lombok.extern.java.Log;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -14,6 +18,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
 import java.util.stream.Collectors;
@@ -26,11 +31,13 @@ public class UserController {
     private final UserService userService;
     private final TransactionsController transactionsController;
     private final QuotesController quotesController;
+    private final UsdService usdService;
 
-    public UserController(UserService userService, TransactionsController transactionsController, QuotesController quotesController) {
+    public UserController(UserService userService, TransactionsController transactionsController, QuotesController quotesController, UsdService usdService) {
         this.userService = userService;
         this.transactionsController = transactionsController;
         this.quotesController = quotesController;
+        this.usdService = usdService;
     }
 
     @LogExecutionTime
@@ -67,49 +74,47 @@ public class UserController {
     @LogExecutionTime
     @Operation(summary = "Operated volume between dates range for user")
     @GetMapping("/users/report")
-    public ResponseEntity<String> reportOperatedVolume(@RequestParam Long id, @RequestParam LocalDate fromDate, @RequestParam LocalDate toDate) {
-        // TODO Retornar un JSON
+    public ResponseEntity<OperatedVolumeReportDTO> reportOperatedVolume(@RequestParam Long id, @RequestParam LocalDate fromDate, @RequestParam LocalDate toDate) {
         List<Order> userOrders = this.transactionsController.getOrdersByUserAndDateRange(id, fromDate, toDate);
 
         if (userOrders.isEmpty()) {
-            return ResponseEntity.ok("No se encontraron órdenes en el rango de fechas especificado.");
+            return ResponseEntity.ok(new OperatedVolumeReportDTO(
+                    id, fromDate, toDate, "No orders were found between the specified dates for User " + id,
+                    0.0, 0.0, List.of()));
         }
 
-        // TODO Valor del dólar (esto debería ser configurable o traído de un servicio)
-        final double dollarValue = 1300;
+        // Obtener valor del dólar desde el servicio
+        final double dollarValue = usdService.getDolarValue();
 
         double totalVolumeInDollars = 0.0;
         double totalVolumeInPesos = 0.0;
 
-        StringBuilder reportBuilder = new StringBuilder();
-        reportBuilder.append("Reporte de volumen operado\n")
-                .append("Usuario ID: ").append(id).append("\n")
-                .append("Desde: ").append(fromDate).append("\n")
-                .append("Hasta: ").append(toDate).append("\n")
-                .append("Detalles por orden:\n");
+        List<OrderReportDetailDTO> orderDetails = new ArrayList<>();
 
         for (Order order : userOrders) {
             Crypto crypto = quotesController.getCryptoCurrencyValue(order.getAsset().toString()).getBody();
-            //TODO: Revisar cuentas para amounts y totales
             double currentCryptoValue = crypto.getPrice();
-            double orderValueInPesos =  order.getAmountArs();
+            double orderValueInPesos = order.getAmountArs();
             double orderValueInDollars = order.getAmountArs() / dollarValue;
 
             totalVolumeInPesos += orderValueInPesos;
             totalVolumeInDollars += orderValueInDollars;
 
-            reportBuilder.append("Criptoactivo: ").append(order.getAsset()).append("\n")
-                    .append("Cantidad nominal: ").append(order.getQuantity()).append("\n")
-                    .append("Cotización actual (USD): ").append(currentCryptoValue).append("\n")
-                    .append("Monto en ARS: ").append(orderValueInPesos).append("\n")
-                    .append("---------------------------\n");
+            // Agregar detalles de la orden al reporte
+            orderDetails.add(new OrderReportDetailDTO(
+                    order.getAsset().toString(),
+                    order.getQuantity(),
+                    currentCryptoValue,
+                    orderValueInPesos
+            ));
         }
 
-        reportBuilder.append("Volumen total operado:\n")
-                .append("En USD: ").append(totalVolumeInDollars).append("\n")
-                .append("En ARS: ").append(totalVolumeInPesos).append("\n");
+        // Crear el reporte de volumen operado
+        OperatedVolumeReportDTO report = new OperatedVolumeReportDTO(
+                id, fromDate, toDate, "Created report successfully.",
+                totalVolumeInDollars, totalVolumeInPesos, orderDetails);
 
-        return ResponseEntity.ok(reportBuilder.toString());
+        return ResponseEntity.ok(report);
     }
 
     @LogExecutionTime
