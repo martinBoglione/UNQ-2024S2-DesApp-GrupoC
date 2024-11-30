@@ -56,7 +56,7 @@ H2: <http://localhost:8080/h2-console/>
 |Implementar JOB de Coverage|:green_circle:|
 |Testing de endpoints usando Postman|:yellow_circle:|
 |:toolbox: **Funcionalidad**| |
-|Listar cotizacion de criptoactivos|:yellow_circle:|
+|Listar cotizacion de criptoactivos|:green_circle:|
 |Permitir que un usuario exprese su intención de compra/venta|:green_circle:|
 |Construir un listado donde se muestran las intenciones activas de compra/venta|:green_circle:|
 |Procesar la transacción informada por un usuario|:yellow_circle:|
