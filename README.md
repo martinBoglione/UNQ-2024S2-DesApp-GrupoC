@@ -54,7 +54,7 @@ H2: <http://localhost:8080/h2-console/>
 |Documentation de Endpoints (APIs) con Swagger (v3)|:green_circle:|
 |TAG en GitHub y Confeccionar Release Notes de entrega 2|:green_circle:|
 |Implementar JOB de Coverage|:green_circle:|
-|Testing de endpoints usando Postman|:yellow_circle:|
+|Testing de endpoints usando Postman|:green_circle:|
 |:toolbox: **Funcionalidad**| |
 |Listar cotizacion de criptoactivos|:green_circle:|
 |Permitir que un usuario exprese su intención de compra/venta|:green_circle:|
