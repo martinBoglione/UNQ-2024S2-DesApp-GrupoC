@@ -12,7 +12,7 @@ public class UsdService {
     private static final String DOLAR_URL = "https://dolarapi.com/v1/dolares/blue";
 
     // Clase interna para mapear la respuesta JSON
-    private static class DolarResponse {
+    private static class DolarResponseService {
         private String moneda;
         private String casa;
         private String nombre;
@@ -28,7 +28,7 @@ public class UsdService {
 
     public Double getDolarValue() {
         // Realiza la llamada a la API y mapea la respuesta a la clase DolarResponse
-        DolarResponse response = restTemplate.getForObject(DOLAR_URL, DolarResponse.class);
+        DolarResponseService response = restTemplate.getForObject(DOLAR_URL, DolarResponseService.class);
         if (response != null) {
             return response.getCompra();
         }
