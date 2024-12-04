@@ -10,7 +10,7 @@
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%clr(%highlight(%-5level){${INFO_LEVEL_COLOR}}) %clr(%logger{36}){cyan} - %msg%n%wEx</pattern>
+            <pattern>%d %clr(%highlight(%-5level){${INFO_LEVEL_COLOR}}) %clr(%logger{36}){cyan} - %msg%n%wEx</pattern>
         </encoder>
     </appender>
 

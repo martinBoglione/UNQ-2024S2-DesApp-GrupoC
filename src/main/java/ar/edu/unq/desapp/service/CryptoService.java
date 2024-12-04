@@ -4,7 +4,6 @@ import ar.edu.unq.desapp.helpers.CurrentTime;
 import ar.edu.unq.desapp.model.Crypto;
 import ar.edu.unq.desapp.model.CryptoAsset;
 import ar.edu.unq.desapp.model.CryptoList;
-import ar.edu.unq.desapp.repositories.CryptoRepository;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,11 +16,9 @@ import java.util.List;
 @Service
 public class CryptoService {
 
-    private final CryptoRepository cryptoRepository;
     private final BinanceCryptoService binanceCryptoService;
 
-    public CryptoService(CryptoRepository cryptoRepository, BinanceCryptoService binanceCryptoService) {
-        this.cryptoRepository = cryptoRepository;
+    public CryptoService(BinanceCryptoService binanceCryptoService) {
         this.binanceCryptoService = binanceCryptoService;
     }
 
