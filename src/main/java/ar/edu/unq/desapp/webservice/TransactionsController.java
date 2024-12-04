@@ -2,11 +2,11 @@ package ar.edu.unq.desapp.webservice;
 
 import ar.edu.unq.desapp.helpers.aspects.LogExecutionTime;
 import ar.edu.unq.desapp.model.*;
-import ar.edu.unq.desapp.model.dto.OrderRequestDTO;
-import ar.edu.unq.desapp.model.dto.OrderResponseDTO;
-import ar.edu.unq.desapp.model.dto.OrderSummaryDTO;
-import ar.edu.unq.desapp.model.dto.UserDTO;
+import ar.edu.unq.desapp.model.dto.*;
+import ar.edu.unq.desapp.model.exceptions.PriceVariationException;
 import ar.edu.unq.desapp.repositories.UserRepository;
+import ar.edu.unq.desapp.service.CryptoService;
+import ar.edu.unq.desapp.service.UsdService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,18 +25,22 @@ import java.util.stream.Collectors;
 public class TransactionsController {
 
     private final TransactionsService transactionsService;
+    private final CryptoService cryptoService;
     private final UserRepository userRepository;
+    private final UsdService usdService;
 
-    public TransactionsController(TransactionsService transactionsService, UserRepository userRepository) {
+    public TransactionsController(TransactionsService transactionsService, CryptoService cryptoService, UserRepository userRepository, UsdService usdService) {
         this.transactionsService = transactionsService;
+        this.cryptoService = cryptoService;
         this.userRepository = userRepository;
+        this.usdService = usdService;
     }
 
     @LogExecutionTime
     @Operation(summary = "Get active orders", description = "Retrieve all orders in database")
-    @ApiResponse(responseCode = "200", description = "Orders retrieved successfully", content = { @Content(schema = @Schema(implementation = Order.class), mediaType = "application/json") })
-    @ApiResponse(responseCode = "400", description = "User with ID # not found", content = { @Content(schema = @Schema()) })
-    @ApiResponse(responseCode = "500", description = "Internal server error", content = { @Content(schema = @Schema()) })
+    @ApiResponse(responseCode = "200", description = "Orders retrieved successfully", content = {@Content(schema = @Schema(implementation = Order.class), mediaType = "application/json")})
+    @ApiResponse(responseCode = "400", description = "User with ID # not found", content = {@Content(schema = @Schema())})
+    @ApiResponse(responseCode = "500", description = "Internal server error", content = {@Content(schema = @Schema())})
     @GetMapping("/orders")
     public List<OrderSummaryDTO> getActiveOrders() {
 
@@ -62,7 +66,7 @@ public class TransactionsController {
     @LogExecutionTime
     @Operation(summary = "Register order")
     @PostMapping("/orders/create")
-    public OrderResponseDTO createOrder(@RequestBody OrderRequestDTO orderRequest) {
+    public Object createOrder(@RequestBody OrderRequestDTO orderRequest) {
 
         /* TODO
             Direccion de envio: Depende del orderRequest.getOperationType()?
@@ -73,11 +77,26 @@ public class TransactionsController {
         User user = userRepository.findActiveUserById(orderRequest.getUserID())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
+        //Get Crpyto price
+        Crypto crypto = cryptoService.getCryptoValue(orderRequest.getAsset().toString());
+        Float cryptoPrice = crypto.getPrice();
+        Double priceDifferencePercentage = Math.abs((cryptoPrice - orderRequest.getPrice()) / cryptoPrice) * 100;
+
+        if(priceDifferencePercentage > 5){
+            throw new PriceVariationException("The provided price has a variation of more than ±5% from the current crypto price.");
+        }
+
+        //Get USD value in ARS
+        final double dollarValue = usdService.getDolarValue();
+
+        //Get amount in ARS
+        double amountArs = orderRequest.getQuantity() * orderRequest.getPrice() * dollarValue;
+
         Order order = Order.builder()
                 .asset(orderRequest.getAsset())
                 .quantity(orderRequest.getQuantity())
                 .price(orderRequest.getPrice())
-                .amountArs(orderRequest.getAmountArs())
+                .amountArs(amountArs)
                 .user(user)
                 .operationType(OperationType.valueOf(orderRequest.getOperationType()))
                 .build();
@@ -85,15 +104,18 @@ public class TransactionsController {
         Order savedOrder = this.transactionsService.createOrder(order);
 
         return new OrderResponseDTO(
-                savedOrder.getAsset().toString(),
-                savedOrder.getQuantity(),
-                savedOrder.getPrice(),
-                savedOrder.getAmountArs(),
-                savedOrder.getOperationType().toString(),
-                user.getName(),
-                user.getSurname()
+            savedOrder.getAsset().toString(),
+            savedOrder.getQuantity(),
+            savedOrder.getPrice(),
+            savedOrder.getAmountArs(),
+            savedOrder.getOperationType().toString(),
+            user.getName(),
+            user.getSurname()
+            //user.getWalletAddress()
         );
+
     }
+
 
     @LogExecutionTime
     @Operation(summary = "Cancel order (forced by user)")

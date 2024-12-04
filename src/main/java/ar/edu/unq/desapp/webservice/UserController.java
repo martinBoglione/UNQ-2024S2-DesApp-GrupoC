@@ -83,7 +83,6 @@ public class UserController {
                     0.0, 0.0, List.of()));
         }
 
-        // Obtener valor del dólar desde el servicio
         final double dollarValue = usdService.getDolarValue();
 
         double totalVolumeInDollars = 0.0;
@@ -100,7 +99,6 @@ public class UserController {
             totalVolumeInPesos += orderValueInPesos;
             totalVolumeInDollars += orderValueInDollars;
 
-            // Agregar detalles de la orden al reporte
             orderDetails.add(new OrderReportDetailDTO(
                     order.getAsset().toString(),
                     order.getQuantity(),
@@ -109,7 +107,6 @@ public class UserController {
             ));
         }
 
-        // Crear el reporte de volumen operado
         OperatedVolumeReportDTO report = new OperatedVolumeReportDTO(
                 id, fromDate, toDate, "Created report successfully.",
                 totalVolumeInDollars, totalVolumeInPesos, orderDetails);

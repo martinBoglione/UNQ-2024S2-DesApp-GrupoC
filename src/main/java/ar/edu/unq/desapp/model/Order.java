@@ -15,10 +15,6 @@ import java.time.LocalDateTime;
 @Table(name = "orders")
 public class Order {
 
-    // TODO: Constraint: price should be +/- 5% from last registered quote
-    //
-    // La validación de precio y el cálculo del monto en ARS se pueden omitir hasta tener funcionando los servicios que traen los precios.
-
 
     @PrePersist
     public void prePersist() {
