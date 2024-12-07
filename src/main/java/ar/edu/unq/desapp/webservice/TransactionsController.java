@@ -12,11 +12,15 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import ar.edu.unq.desapp.service.TransactionsService;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -116,16 +120,35 @@ public class TransactionsController {
 
     }
 
+    @LogExecutionTime
+    @Operation(summary = "Cancel order (forced by user)")
+    @PatchMapping("/orders/cancel/user/{id}")
+    public void userCancelOrder(@PathVariable Long id) {
+
+        //Get authenticated user
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new RuntimeException("User is not authenticated");
+        }
+
+        String email = authentication.getName();
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(()-> new UsernameNotFoundException("User not found"));
+
+
+        user.setReputation(user.getReputation() - 20);
+        userRepository.save(user);
+
+        transactionsService.userCancelOrder(id);
+    }
 
     @LogExecutionTime
     @Operation(summary = "Cancel order (forced by user)")
-    @PatchMapping("/orders/cancel/{id}")
-    public void cancelOrder(@PathVariable Long id) {
-        /* TODO
-            Agregar logica de resta o suma de reputacion
-            Agregar logica de cancel by system
-        * */
-        transactionsService.cancelOrder(id);
+    @PatchMapping("/orders/cancel/system/{id}")
+    public void systemCancelOrder(@PathVariable Long id) {
+        transactionsService.systemCancelOrder(id);
     }
 
     @LogExecutionTime
@@ -136,8 +159,20 @@ public class TransactionsController {
             Se busca la orden {id}, si pasa los controles se crea una Transaction, y se cambia el estado de la orden.
             Agregar logica
         * */
+        Order order = transactionsService.getOrderById(id);
 
-        transactionsService.fillOrder(id);
+        //Get Crpyto price
+        Crypto crypto = cryptoService.getCryptoValue(order.getAsset().toString());
+        Float cryptoPrice = crypto.getPrice();
+        Double priceDifferencePercentage = Math.abs((cryptoPrice - order.getPrice()) / cryptoPrice) * 100;
+
+        if(priceDifferencePercentage > 5){
+            transactionsService.systemCancelOrder(id);
+            throw new PriceVariationException("The provided price has a variation of more than ±5% from the current crypto price.");
+        } else {
+            transactionsService.fillOrder(id);
+        }
+        
     }
 
     @LogExecutionTime
