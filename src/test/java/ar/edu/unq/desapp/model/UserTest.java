@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.client.HttpClientErrorException;
 
 @SpringBootTest
 class UserTest {
@@ -32,52 +34,60 @@ class UserTest {
     @Test
     void testInvalidNameThrowsException() {
         user.setName("Ma");
-        Exception exception = Assertions.assertThrows(InvalidNameException.class, user::validateUser);
-        Assertions.assertEquals(InvalidNameException.class, exception.getClass());
+        HttpClientErrorException exception = Assertions.assertThrows(HttpClientErrorException.class, user::validateUser);
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST, exception.getStatusCode());
+        Assertions.assertEquals("The user name and surname length must be between 3 and 30 characters", exception.getStatusText());
 
         user.setName("Martin");
         user.setSurname("B");
-        exception = Assertions.assertThrows(InvalidNameException.class, user::validateUser);
-        Assertions.assertEquals(InvalidNameException.class, exception.getClass());
+        exception = Assertions.assertThrows(HttpClientErrorException.class, user::validateUser);
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST, exception.getStatusCode());
+        Assertions.assertEquals("The user name and surname length must be between 3 and 30 characters", exception.getStatusText());
     }
 
     @Test
     void testInvalidEmailThrowsException() {
         user.setEmail("invalid-email");
-        Exception exception = Assertions.assertThrows(InvalidEmailException.class, user::validateUser);
-        Assertions.assertEquals(InvalidEmailException.class, exception.getClass());
+        HttpClientErrorException exception = Assertions.assertThrows(HttpClientErrorException.class, user::validateUser);
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST, exception.getStatusCode());
+        Assertions.assertEquals("The email is not valid.", exception.getStatusText());
     }
 
     @Test
     void testInvalidAddressThrowsException() {
         user.setAddress("Short");
-        Exception exception = Assertions.assertThrows(InvalidAddressException.class, user::validateUser);
-        Assertions.assertEquals(InvalidAddressException.class, exception.getClass());
+        HttpClientErrorException exception = Assertions.assertThrows(HttpClientErrorException.class, user::validateUser);
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST, exception.getStatusCode());
+        Assertions.assertEquals("The address  length must be between 10 and 30 characters", exception.getStatusText());
     }
 
     @Test
     void testInvalidPasswordThrowsException() {
         user.setPassword("weak"); // No uppercase or special characters
-        Exception exception = Assertions.assertThrows(InvalidPasswordException.class, user::validateUser);
-        Assertions.assertEquals(InvalidPasswordException.class, exception.getClass());
+        HttpClientErrorException exception = Assertions.assertThrows(HttpClientErrorException.class, user::validateUser);
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST, exception.getStatusCode());
+        Assertions.assertEquals("Password must have a minimum 6 characters long and contain 1 uppercase and lowercase letter and a special character", exception.getStatusText());
 
         user.setPassword("StrongPass"); // Missing special character
-        exception = Assertions.assertThrows(InvalidPasswordException.class, user::validateUser);
-        Assertions.assertEquals(InvalidPasswordException.class, exception.getClass());
+        exception = Assertions.assertThrows(HttpClientErrorException.class, user::validateUser);
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST, exception.getStatusCode());
+        Assertions.assertEquals("Password must have a minimum 6 characters long and contain 1 uppercase and lowercase letter and a special character", exception.getStatusText());
     }
 
     @Test
     void testInvalidCVUThrowsException() {
         user.setCvu("12345678901234567890"); // Less than 22 characters
-        Exception exception = Assertions.assertThrows(InvalidCVUException.class, user::validateUser);
-        Assertions.assertEquals(InvalidCVUException.class, exception.getClass());
+        HttpClientErrorException exception = Assertions.assertThrows(HttpClientErrorException.class, user::validateUser);
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST, exception.getStatusCode());
+        Assertions.assertEquals("The CVU length must be 22 characters", exception.getStatusText());
     }
 
     @Test
     void testInvalidWalletAddressThrowsException() {
         user.setWalletAddress("1234567"); // Less than 8 characters
-        Exception exception = Assertions.assertThrows(InvalidWalletException.class, user::validateUser);
-        Assertions.assertEquals(InvalidWalletException.class, exception.getClass());
+        HttpClientErrorException exception = Assertions.assertThrows(HttpClientErrorException.class, user::validateUser);
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST, exception.getStatusCode());
+        Assertions.assertEquals("The Wallet length must be 8 characters", exception.getStatusText());
     }
 
     @Test

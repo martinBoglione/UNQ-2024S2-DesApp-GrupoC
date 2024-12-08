@@ -3,7 +3,8 @@ package ar.edu.unq.desapp.model;
 import ar.edu.unq.desapp.model.exceptions.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.http.HttpStatus;
 import java.util.regex.Pattern;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -71,21 +72,17 @@ public class User {
     @Builder.Default
     private Integer reputation = 0;
 
+    private void thrwoBadRequestError(String message) {
+        throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, message);
+    }
 
     public void validateUser() {
-        log.info("Validating user with password length: " + password.length());
-
-        if(!isValidName(this.name,this.surname))  {throw new InvalidNameException();}
-
-        if (!isValidEmail(this.email)) {throw new InvalidEmailException();}
-
-        if (!isValidAddress(this.address)) {throw new InvalidAddressException();}
-
-        if (!isValidPassword(this.password)) {throw new InvalidPasswordException();}
-
-        if (!isValidCVU(this.cvu)) {throw new InvalidCVUException();}
-
-        if (!isValidWallet(this.walletAddress)) {throw new InvalidWalletException();}
+        if(!isValidName(this.name,this.surname))  { thrwoBadRequestError("The user name and surname length must be between 3 and 30 characters"); }
+        if (!isValidEmail(this.email)) { thrwoBadRequestError("The email is not valid."); }
+        if (!isValidAddress(this.address)) { thrwoBadRequestError("The address  length must be between 10 and 30 characters"); }
+        if (!isValidPassword(this.password)) { thrwoBadRequestError("Password must have a minimum 6 characters long and contain 1 uppercase and lowercase letter and a special character"); }
+        if (!isValidCVU(this.cvu)) { thrwoBadRequestError("The CVU length must be 22 characters"); }
+        if (!isValidWallet(this.walletAddress)) { thrwoBadRequestError("The Wallet length must be 8 characters"); }
     }
 
     public boolean isValidName(String name, String surname) {

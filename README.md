@@ -18,9 +18,10 @@
 Enunciado: <https://docs.google.com/document/d/1Imga3QhLWMd0fb5n8EFBmQnS7HtxFJ2sXOLgzfSEX0k/edit#heading=h.bwfobs81j2q4>
 ___
 
+H2: <http://localhost:8080/h2-console/>
 Swagger: <http://localhost:8080/swagger-ui/index.html>  
 Actuator: <http://localhost:8080/actuator>  
-H2: <http://localhost:8080/h2-console/>
+SonarCloud: <https://sonarcloud.io/project/overview?id=martinBoglione_UNQ-202402-grupoG>
 
 :green_circle: :yellow_circle: :red_circle:
 
