@@ -1,6 +1,8 @@
 package ar.edu.unq.desapp.repositories;
 
 import ar.edu.unq.desapp.model.Order;
+import ar.edu.unq.desapp.model.User;
+import ar.edu.unq.desapp.model.dto.OrderRequestDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -10,9 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface TransactionsRepository extends JpaRepository<Order,Long> {
+
+
+    @Query("SELECT o FROM Order o WHERE o.id = :id")
+    Order findOrderById(Long id);
 
     @Query("SELECT o FROM Order o WHERE o.status = 'active'")
     List<Order> findAllActiveOrders();
@@ -25,7 +32,12 @@ public interface TransactionsRepository extends JpaRepository<Order,Long> {
     @Modifying
     @Transactional
     @Query("UPDATE Order o SET o.status = 'CANCELLED_BY_USER' WHERE o.id = :id")
-    void cancelOrder(Long id);
+    void userCancelOrder(Long id);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Order o SET o.status = 'CANCELLED_BY_SYSTEM' WHERE o.id = :id")
+    void systemCancelOrder(Long id);
 
     @Modifying
     @Transactional
