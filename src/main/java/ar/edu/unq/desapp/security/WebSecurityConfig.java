@@ -25,7 +25,6 @@ public class WebSecurityConfig {
     private final CustomUserDetailsService userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-
     public WebSecurityConfig(CustomUserDetailsService userDetailsService, JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.userDetailsService = userDetailsService;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
@@ -38,19 +37,11 @@ public class WebSecurityConfig {
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return new ProviderManager(authenticationProvider);
     }
-    @Value("${cryptoexchange.security.password-encoder-enabled:true}")
-    private Boolean passwordEncoderEnabled;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        if (passwordEncoderEnabled)
-            return new BCryptPasswordEncoder();
-        else {
-            log.warn("Password Encoder desactivado!!!");
-            return NoOpPasswordEncoder.getInstance();
-        }
+        return new BCryptPasswordEncoder();
     }
-
 
     private static final String[] AUTH_WHITELIST = {
             "/api/auth/**",

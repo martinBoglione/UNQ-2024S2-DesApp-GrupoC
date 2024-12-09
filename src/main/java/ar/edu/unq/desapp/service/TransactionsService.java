@@ -1,17 +1,12 @@
 package ar.edu.unq.desapp.service;
 
 import ar.edu.unq.desapp.model.Order;
-import ar.edu.unq.desapp.model.User;
-import ar.edu.unq.desapp.model.dto.OrderRequestDTO;
-import ar.edu.unq.desapp.model.exceptions.UserNotFoundException;
 import ar.edu.unq.desapp.repositories.TransactionsRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
-
 
 @Transactional
 @Service

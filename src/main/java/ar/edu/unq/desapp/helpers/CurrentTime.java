@@ -1,13 +1,14 @@
 package ar.edu.unq.desapp.helpers;
 
-import lombok.NoArgsConstructor;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@NoArgsConstructor
 public class CurrentTime {
     private static final String DATE_FORMAT = "dd/MM/yyyy HH:mm:ss";
+
+    private CurrentTime() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static Date getNewDate(){
         return new Date();

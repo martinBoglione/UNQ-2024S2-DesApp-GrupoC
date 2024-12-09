@@ -1,6 +1,5 @@
 package ar.edu.unq.desapp.model;
 
-import jakarta.persistence.Id;
 import lombok.*;
 
 @Setter

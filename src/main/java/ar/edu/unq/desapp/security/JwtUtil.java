@@ -7,8 +7,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import io.jsonwebtoken.io.Decoders;
-import java.security.Key;
 import java.util.function.Function;
 import java.util.Date;
 import java.util.HashMap;
