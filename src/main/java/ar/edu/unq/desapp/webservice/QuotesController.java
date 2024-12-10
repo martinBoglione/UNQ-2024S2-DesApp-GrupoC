@@ -37,7 +37,7 @@ public class QuotesController {
     @LogExecutionTime
     @Operation(summary = "Get last quotes for all known cryptocurrencies")
     @GetMapping("/quotes/latest")
-    public ResponseEntity<CryptoList> getLastPersistedCryptoCurrencyPrices() {
+    public ResponseEntity<CryptoList> getAllCryptoPrices() {
         CryptoList list = cryptoService.getAllCryptoPrices();
         return ResponseEntity.ok().body(list);
     }
@@ -45,7 +45,7 @@ public class QuotesController {
     @LogExecutionTime
     @Operation(summary = "Get cached quotes (fast response)")
     @GetMapping("/quotes")
-    public ResponseEntity<CryptoList> getAllCryptoCurrencyPrices() {
+    public ResponseEntity<CryptoList> getAllCachedCryptoPrices() {
         CryptoList list = cryptoService.getAllCachedCryptoPrices();
         return ResponseEntity.ok().body(list);
     }
