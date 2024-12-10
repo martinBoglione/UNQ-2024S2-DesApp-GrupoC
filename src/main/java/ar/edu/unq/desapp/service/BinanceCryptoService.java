@@ -14,7 +14,7 @@ import java.util.List;
 @Transactional
 @Service
 public class BinanceCryptoService {
-    private RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate = new RestTemplate();
 
     @Value("${integration.binance.api.url:NONE}")
     private String binanceApiURL;

@@ -8,7 +8,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +21,6 @@ public class CryptoService {
         this.binanceCryptoService = binanceCryptoService;
     }
 
-    @Cacheable(value = "cacheCrypto")
     public CryptoList getAllCryptoPrices() {
         CryptoList list = new CryptoList();
         for (CryptoAsset crypto : CryptoAsset.values()) {
@@ -35,6 +33,11 @@ public class CryptoService {
 
         }
         return list;
+    }
+
+    @Cacheable(value = "cacheCrypto")
+    public CryptoList getAllCachedCryptoPrices() {
+        return getAllCryptoPrices();
     }
 
 

@@ -1,7 +1,10 @@
 package ar.edu.unq.desapp.service;
 
+import lombok.Getter;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -16,14 +19,11 @@ public class UsdService {
         private String moneda;
         private String casa;
         private String nombre;
+        @Getter
         private Double compra;
         private Double venta;
         private String fechaActualizacion;
 
-        // Getters y setters
-        public Double getCompra() {
-            return compra;
-        }
     }
 
     public Double getDolarValue() {
@@ -32,6 +32,6 @@ public class UsdService {
         if (response != null) {
             return response.getCompra();
         }
-        throw new RuntimeException("No se pudo obtener el valor del dólar");
+        throw new HttpClientErrorException(HttpStatus.NO_CONTENT, "No se pudo obtener el valor del dólar");
     }
 }

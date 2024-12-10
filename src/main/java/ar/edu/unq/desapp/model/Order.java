@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @Table(name = "orders")
 public class Order {
 
-
     @PrePersist
     public void prePersist() {
         if (this.timestamp == null) {

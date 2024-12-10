@@ -3,7 +3,8 @@ package ar.edu.unq.desapp.webservice;
 import ar.edu.unq.desapp.helpers.aspects.LogExecutionTime;
 import ar.edu.unq.desapp.model.*;
 import ar.edu.unq.desapp.model.dto.*;
-import ar.edu.unq.desapp.model.exceptions.PriceVariationException;
+import ar.edu.unq.desapp.model.exceptions.TransactionPreconditionException;
+import ar.edu.unq.desapp.model.exceptions.UserNotFoundException;
 import ar.edu.unq.desapp.repositories.UserRepository;
 import ar.edu.unq.desapp.service.CryptoService;
 import ar.edu.unq.desapp.service.UsdService;
@@ -13,9 +14,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import ar.edu.unq.desapp.service.TransactionsService;
 
@@ -23,6 +22,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api")
@@ -73,25 +73,15 @@ public class TransactionsController {
     @PostMapping("/orders/create")
     public Object createOrder(@RequestBody OrderRequestDTO orderRequest) {
 
-        //Get authenticated user
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (authentication == null || !authentication.isAuthenticated()) {
-            throw new RuntimeException("User is not authenticated");
-        }
-
-        String email = authentication.getName();
-
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(()-> new UsernameNotFoundException("User not found"));
+        User user = getAuthenticatedUser();
 
         //Get Crpyto price
         Crypto crypto = cryptoService.getCryptoValue(orderRequest.getAsset().toString());
         Float cryptoPrice = crypto.getPrice();
-        Double priceDifferencePercentage = Math.abs((cryptoPrice - orderRequest.getPrice()) / cryptoPrice) * 100;
+        double priceDifferencePercentage = Math.abs((cryptoPrice - orderRequest.getPrice()) / cryptoPrice) * 100;
 
         if(priceDifferencePercentage > 5){
-            throw new PriceVariationException("The provided price has a variation of more than ±5% from the current crypto price.");
+            throw new TransactionPreconditionException("The provided price has a variation of more than ±5% from the current crypto price.");
         }
 
         //Get USD value in ARS
@@ -119,7 +109,6 @@ public class TransactionsController {
             savedOrder.getOperationType().toString(),
             user.getName(),
             user.getSurname()
-            //user.getWalletAddress()
         );
 
     }
@@ -129,17 +118,7 @@ public class TransactionsController {
     @PatchMapping("/orders/cancel/user/{id}")
     public void userCancelOrder(@PathVariable Long id) {
 
-        //Get authenticated user
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (authentication == null || !authentication.isAuthenticated()) {
-            throw new AuthenticationCredentialsNotFoundException("User is not authenticated");
-        }
-
-        String email = authentication.getName();
-
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(()-> new UsernameNotFoundException("User not found"));
+        User user = getAuthenticatedUser();
 
         //Get logged user ID
         Long userID = user.getId();
@@ -148,8 +127,8 @@ public class TransactionsController {
         //Get order user ID
         Long orderUserID = order.getUser().getId();
 
-        if(userID != orderUserID) {
-            throw new PriceVariationException("Can't cancel another user's order");
+        if(!Objects.equals(userID, orderUserID)) {
+            throw new TransactionPreconditionException("Can't cancel another user's order");
         } else {
             user.setReputation(user.getReputation() - 20);
             userRepository.save(user);
@@ -170,41 +149,31 @@ public class TransactionsController {
     @PostMapping("/orders/fill/{id}")
     public void fillOrder(@PathVariable Long id, @RequestBody OrderFillDto orderFillDTO) {
 
-        //Get authenticated user
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (authentication == null || !authentication.isAuthenticated()) {
-            throw new RuntimeException("User is not authenticated");
-        }
-
-        String email = authentication.getName();
-
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(()-> new UsernameNotFoundException("User not found"));
+        User user = getAuthenticatedUser();
 
         //Get logged user ID
         Long userID = user.getId();
 
         Order order = transactionsService.getOrderById(id);
         //Get order amount in ARS
-        Double amountArs = order.getAmountArs();
+        double amountArs = order.getAmountArs();
         //Get order user ID
         Long orderUserID = order.getUser().getId();
 
         //Get counterparty amount in ARS
-        Double amountArsCounterParty = orderFillDTO.getAmountArs();
+        double amountArsCounterParty = orderFillDTO.getAmountArs();
 
-        Double priceDifferencePercentage = Math.abs((amountArsCounterParty - amountArs) / amountArsCounterParty) * 100;
+        double priceDifferencePercentage = Math.abs((amountArsCounterParty - amountArs) / amountArsCounterParty) * 100;
 
-        if (userID == orderUserID) {
-            throw new PriceVariationException("A user can't fill an order created by themselves");
+        if (Objects.equals(userID, orderUserID)) {
+            throw new TransactionPreconditionException("A user can't fill an order created by themselves");
         }
         else if (order.getStatus() != OrderStatus.ACTIVE) {
-            throw new PriceVariationException("Order must be ACTIVE");
+            throw new TransactionPreconditionException("Order must be ACTIVE");
         }
         else if(priceDifferencePercentage > 5){
             transactionsService.systemCancelOrder(id);
-            throw new PriceVariationException("The provided price has a variation of more than ±5% from the current crypto price.");
+            throw new TransactionPreconditionException("The provided price has a variation of more than ±5% from the current crypto price.");
         } else {
             transactionsService.fillOrder(id);
         }
@@ -215,22 +184,8 @@ public class TransactionsController {
     @Operation(summary = "User (issuer) confirms transaction completed")
     @PatchMapping("/orders/confirm/{id}")
     public void transactionCompleted(@PathVariable Long id) {
-        /* TODO
-            Se busca la Transaction con {id} y se confirma junto con la orden asociada.
-            Agregar logica
-        * */
 
-        //Get authenticated user
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (authentication == null || !authentication.isAuthenticated()) {
-            throw new RuntimeException("User is not authenticated");
-        }
-
-        String email = authentication.getName();
-
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(()-> new UsernameNotFoundException("User not found"));
+        User user = getAuthenticatedUser();
 
         //Get logged user ID
         Long userID = user.getId();
@@ -240,11 +195,11 @@ public class TransactionsController {
         Long orderUserID = order.getUser().getId();
 
 
-        if (userID != orderUserID) {
-            throw new PriceVariationException("User must be issuer of order");
+        if (!Objects.equals(userID, orderUserID)) {
+            throw new TransactionPreconditionException("User must be issuer of order");
         }
         else if (order.getStatus() != OrderStatus.INPROCESS) {
-            throw new PriceVariationException("Order must be INPROCESS");
+            throw new TransactionPreconditionException("Order must be INPROCESS");
         } else {
             LocalDateTime now = LocalDateTime.now();
             LocalDateTime orderTimestamp = order.getTimestamp(); // Assumes order.getTimestamp() returns a LocalDateTime
@@ -266,5 +221,13 @@ public class TransactionsController {
 
     public List<Order> getOrdersByUserAndDateRange(Long userId, LocalDate fromDate, LocalDate toDate) {
         return this.transactionsService.getOrdersByUserAndDateRange(userId, fromDate, toDate);
+    }
+
+    private User getAuthenticatedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException("User with email " + email + " not found"));
     }
 }

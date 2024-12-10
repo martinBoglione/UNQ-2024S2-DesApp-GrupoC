@@ -7,82 +7,20 @@ import static org.junit.jupiter.api.Assertions.*;
 class OrderTest {
 
     @Test
-    void prePersist() {
-    }
+    void instanceCreationReturnsActiveOrder() {
+        User user = User.builder().build();
+        Order order = Order.builder()
+                .asset(CryptoAsset.BNBUSDT)
+                .quantity(1000)
+                .price(152.25)
+                .amountArs(152250)
+                .user(user)
+                .operationType(OperationType.BUY)
+                .build();
 
-    @Test
-    void getId() {
-    }
+        assertNotNull(order);
+        assertEquals(user, order.getUser());
+        assertSame(OrderStatus.ACTIVE, order.getStatus());
 
-    @Test
-    void getTimestamp() {
-    }
-
-    @Test
-    void getAsset() {
-    }
-
-    @Test
-    void getQuantity() {
-    }
-
-    @Test
-    void getPrice() {
-    }
-
-    @Test
-    void getAmountArs() {
-    }
-
-    @Test
-    void getUser() {
-    }
-
-    @Test
-    void getOperationType() {
-    }
-
-    @Test
-    void getStatus() {
-    }
-
-    @Test
-    void setId() {
-    }
-
-    @Test
-    void setTimestamp() {
-    }
-
-    @Test
-    void setAsset() {
-    }
-
-    @Test
-    void setQuantity() {
-    }
-
-    @Test
-    void setPrice() {
-    }
-
-    @Test
-    void setAmountArs() {
-    }
-
-    @Test
-    void setUser() {
-    }
-
-    @Test
-    void setOperationType() {
-    }
-
-    @Test
-    void setStatus() {
-    }
-
-    @Test
-    void builder() {
     }
 }

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
 
-public class WebservicesDefinitionTest {
+class WebservicesDefinitionTest {
 
     private JavaClasses baseClasses;
 

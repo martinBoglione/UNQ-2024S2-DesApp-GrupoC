@@ -14,7 +14,6 @@ import java.util.List;
 @Repository
 public interface TransactionsRepository extends JpaRepository<Order,Long> {
 
-
     @Query("SELECT o FROM Order o WHERE o.id = :id")
     Order findOrderById(Long id);
 
