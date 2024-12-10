@@ -58,11 +58,6 @@ public class User {
     @Builder.Default
     private Integer operationsQuantity = 0;
 
-    /*
-    TODO: El usuario deberia tener la reputacion
-            Se calcula como cantidad de puntos otorgados / cantidad de operaciones.
-            Si la persona no ha operado se muestra “Sin operaciones”
-     */
     @Column(nullable = false)
     @Builder.Default
     private Integer reputation = 0;
