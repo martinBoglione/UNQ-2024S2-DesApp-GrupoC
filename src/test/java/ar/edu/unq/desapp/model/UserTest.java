@@ -91,39 +91,40 @@ class UserTest {
 
     @Test
     void testIsValidName() {
-        Assertions.assertEquals(true, user.isValidName("Martin", "Boglione"));
-        Assertions.assertEquals(false, user.isValidName("Ma", "Boglione"));
-        Assertions.assertEquals(false, user.isValidName("Martin", "B"));
+        Assertions.assertTrue(user.isValidName("Martin", "Boglione"));
+        Assertions.assertFalse(user.isValidName("Ma", "Boglione"));
+        Assertions.assertFalse(user.isValidName("Martin", "B"));
     }
 
     @Test
     void testIsValidEmail() {
-        Assertions.assertEquals(true, user.isValidEmail("martinboglione97@gmail.com"));
-        Assertions.assertEquals(false, user.isValidEmail("invalid-email"));
+        Assertions.assertTrue(user.isValidEmail("martinboglione97@gmail.com"));
+        Assertions.assertFalse(user.isValidEmail("invalid-email"));
     }
 
     @Test
     void testIsValidAddress() {
-        Assertions.assertEquals(true, user.isValidAddress("Segurola y Habana 4310"));
-        Assertions.assertEquals(false, user.isValidAddress("Short"));
+        Assertions.assertTrue(user.isValidAddress("Segurola y Habana 4310"));
+        Assertions.assertFalse(user.isValidAddress("Short"));
+        Assertions.assertFalse(user.isValidAddress("This is a long address over thirty characters"));
     }
 
     @Test
     void testIsValidPassword() {
-        Assertions.assertEquals(true, user.isValidPassword("Maradona10!"));
-        Assertions.assertEquals(false, user.isValidPassword("weak"));
-        Assertions.assertEquals(false, user.isValidPassword("StrongPass"));
+        Assertions.assertTrue(user.isValidPassword("Maradona10!"));
+        Assertions.assertFalse(user.isValidPassword("weak"));
+        Assertions.assertFalse(user.isValidPassword("StrongPass"));
     }
 
     @Test
     void testIsValidCVU() {
-        Assertions.assertEquals(true, user.isValidCVU("1234567890123456789012"));
-        Assertions.assertEquals(false, user.isValidCVU("12345678901234567890"));
+        Assertions.assertTrue(user.isValidCVU("1234567890123456789012"));
+        Assertions.assertFalse(user.isValidCVU("12345678901234567890"));
     }
 
     @Test
     void testIsValidWalletAddress() {
-        Assertions.assertEquals(true, user.isValidWallet("12345678"));
-        Assertions.assertEquals(false, user.isValidWallet("1234567"));
+        Assertions.assertTrue(user.isValidWallet("12345678"));
+        Assertions.assertFalse(user.isValidWallet("1234567"));
     }
 }

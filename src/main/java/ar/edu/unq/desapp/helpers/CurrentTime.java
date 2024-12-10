@@ -10,13 +10,8 @@ public class CurrentTime {
         throw new IllegalStateException("Utility class");
     }
 
-    public static Date getNewDate(){
-        return new Date();
-    }
-
     public static String getNewDateString(){
-        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
-        return formatter.format(getNewDate());
+        return getNewDateFormatter().format(new Date());
     }
 
     public static SimpleDateFormat getNewDateFormatter(){

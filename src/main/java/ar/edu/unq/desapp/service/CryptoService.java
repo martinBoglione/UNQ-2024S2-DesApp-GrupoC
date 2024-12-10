@@ -42,9 +42,8 @@ public class CryptoService {
     public Crypto getCryptoValue(String symbol) {
         Crypto entity = binanceCryptoService.getCryptoCurrencyValue(symbol);
 
-        SimpleDateFormat formatter = CurrentTime.getNewDateFormatter();
         if (entity != null) {
-            entity.setLastUpdateDateAndTime(formatter.format(new Date()));
+            entity.setLastUpdateDateAndTime(CurrentTime.getNewDateFormatter().format(new Date()));
         }
         return entity;
     }

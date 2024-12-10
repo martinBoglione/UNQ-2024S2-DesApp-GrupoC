@@ -14,21 +14,22 @@ import java.util.List;
 @Slf4j
 public class DataInitializer implements CommandLineRunner {
 
-    @Autowired
     UserRepository userRepository;
-
-    @Autowired
     PasswordEncoder passwordEncoder;
+    CryptoService cryptoService;
 
     @Autowired
-    CryptoService cryptoService;
+    public DataInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder, CryptoService cryptoService) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.cryptoService = cryptoService;
+    }
 
     @Override
     public void run(String... args) {
         log.info("==> INICIO Generando datos en la BD");
 
         this.generateUsers();
-        this.generateQuotes();
         this.generateOrders();
         this.generateTransactions();
 
@@ -60,11 +61,6 @@ public class DataInitializer implements CommandLineRunner {
         /* 0x9w2ymi  0xm1y9dw   0xi2y9wd   0xd1y9mw   0x2w9ymi */
 
         userRepository.saveAll(List.of(user1, user2, user3, user4, user5));
-    }
-
-    private void generateQuotes() {
-        log.info("Generando cotizaciones...");
-        /* TODO completar */
     }
 
     private void generateOrders() {
