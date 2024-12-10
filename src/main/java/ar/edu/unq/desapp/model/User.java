@@ -54,10 +54,6 @@ public class User {
     @Builder.Default
     private boolean deleted = false;
 
-
-    /*
-    TODO: El usuario deberia tener la cantidad de operaciones
-     */
     @Column(nullable = false)
     @Builder.Default
     private Integer operationsQuantity = 0;

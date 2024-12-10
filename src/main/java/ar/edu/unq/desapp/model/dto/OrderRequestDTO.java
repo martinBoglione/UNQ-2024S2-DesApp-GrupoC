@@ -11,6 +11,5 @@ public class OrderRequestDTO {
     private CryptoAsset asset;
     private double quantity;
     private double price;
-    private Long userID;
     private String operationType;
 }

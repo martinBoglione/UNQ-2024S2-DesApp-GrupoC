@@ -19,7 +19,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import ar.edu.unq.desapp.service.TransactionsService;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -71,14 +73,17 @@ public class TransactionsController {
     @PostMapping("/orders/create")
     public Object createOrder(@RequestBody OrderRequestDTO orderRequest) {
 
-        /* TODO
-            Direccion de envio: Depende del orderRequest.getOperationType()?
-            Si la operación es venta, debe mostrar un CVU para que el usuario 2 haga la transferencia
-            Si la operación es compra,  debe mostrar la dirección de la billetera de CriptoActivos
-         */
+        //Get authenticated user
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        User user = userRepository.findActiveUserById(orderRequest.getUserID())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new RuntimeException("User is not authenticated");
+        }
+
+        String email = authentication.getName();
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(()-> new UsernameNotFoundException("User not found"));
 
         //Get Crpyto price
         Crypto crypto = cryptoService.getCryptoValue(orderRequest.getAsset().toString());
@@ -136,11 +141,21 @@ public class TransactionsController {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(()-> new UsernameNotFoundException("User not found"));
 
+        //Get logged user ID
+        Long userID = user.getId();
 
-        user.setReputation(user.getReputation() - 20);
-        userRepository.save(user);
+        Order order = transactionsService.getOrderById(id);
+        //Get order user ID
+        Long orderUserID = order.getUser().getId();
 
-        transactionsService.userCancelOrder(id);
+        if(userID != orderUserID) {
+            throw new PriceVariationException("Can't cancel another user's order");
+        } else {
+            user.setReputation(user.getReputation() - 20);
+            userRepository.save(user);
+
+            transactionsService.userCancelOrder(id);
+        }
     }
 
     @LogExecutionTime
@@ -153,25 +168,47 @@ public class TransactionsController {
     @LogExecutionTime
     @Operation(summary = "User (counterparty) wants to fill an order (transact)")
     @PostMapping("/orders/fill/{id}")
-    public void fillOrder(@PathVariable Long id) {
-        /* TODO
-            Se busca la orden {id}, si pasa los controles se crea una Transaction, y se cambia el estado de la orden.
-            Agregar logica
-        * */
+    public void fillOrder(@PathVariable Long id, @RequestBody OrderFillDto orderFillDTO) {
+
+        //Get authenticated user
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new RuntimeException("User is not authenticated");
+        }
+
+        String email = authentication.getName();
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(()-> new UsernameNotFoundException("User not found"));
+
+        //Get logged user ID
+        Long userID = user.getId();
+
         Order order = transactionsService.getOrderById(id);
+        //Get order amount in ARS
+        Double amountArs = order.getAmountArs();
+        //Get order user ID
+        Long orderUserID = order.getUser().getId();
 
-        //Get Crpyto price
-        Crypto crypto = cryptoService.getCryptoValue(order.getAsset().toString());
-        Float cryptoPrice = crypto.getPrice();
-        Double priceDifferencePercentage = Math.abs((cryptoPrice - order.getPrice()) / cryptoPrice) * 100;
+        //Get counterparty amount in ARS
+        Double amountArsCounterParty = orderFillDTO.getAmountArs();
 
-        if(priceDifferencePercentage > 5){
+        Double priceDifferencePercentage = Math.abs((amountArsCounterParty - amountArs) / amountArsCounterParty) * 100;
+
+        if (userID == orderUserID) {
+            throw new PriceVariationException("A user can't fill an order created by themselves");
+        }
+        else if (order.getStatus() != OrderStatus.ACTIVE) {
+            throw new PriceVariationException("Order must be ACTIVE");
+        }
+        else if(priceDifferencePercentage > 5){
             transactionsService.systemCancelOrder(id);
             throw new PriceVariationException("The provided price has a variation of more than ±5% from the current crypto price.");
         } else {
             transactionsService.fillOrder(id);
         }
-        
+
     }
 
     @LogExecutionTime
@@ -183,7 +220,48 @@ public class TransactionsController {
             Agregar logica
         * */
 
-        transactionsService.confirmOrder(id);
+        //Get authenticated user
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new RuntimeException("User is not authenticated");
+        }
+
+        String email = authentication.getName();
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(()-> new UsernameNotFoundException("User not found"));
+
+        //Get logged user ID
+        Long userID = user.getId();
+
+        Order order = transactionsService.getOrderById(id);
+        //Get order user ID
+        Long orderUserID = order.getUser().getId();
+
+
+        if (userID != orderUserID) {
+            throw new PriceVariationException("User must be issuer of order");
+        }
+        else if (order.getStatus() != OrderStatus.INPROCESS) {
+            throw new PriceVariationException("Order must be INPROCESS");
+        } else {
+            LocalDateTime now = LocalDateTime.now();
+            LocalDateTime orderTimestamp = order.getTimestamp(); // Assumes order.getTimestamp() returns a LocalDateTime
+
+            Duration duration = Duration.between(orderTimestamp, now);
+            long minutes = duration.toMinutes();
+
+            if (minutes <= 30) {
+                user.setReputation(user.getReputation() + 10);
+            } else {
+                user.setReputation(user.getReputation() + 5);
+            }
+            user.setOperationsQuantity((user.getOperationsQuantity() + 1));
+            userRepository.save(user);
+
+            transactionsService.confirmOrder(id);
+        }
     }
 
     public List<Order> getOrdersByUserAndDateRange(Long userId, LocalDate fromDate, LocalDate toDate) {
