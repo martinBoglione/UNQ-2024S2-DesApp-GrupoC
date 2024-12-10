@@ -31,7 +31,6 @@ public class DataInitializer implements CommandLineRunner {
 
         this.generateUsers();
         this.generateOrders();
-        this.generateTransactions();
 
         log.info("==> FIN Generando datos en la BD");
     }
@@ -68,8 +67,4 @@ public class DataInitializer implements CommandLineRunner {
         /* TODO completar */
     }
 
-    private void generateTransactions() {
-        log.info("Generando transacciones...");
-        /* TODO completar */
-    }
 }

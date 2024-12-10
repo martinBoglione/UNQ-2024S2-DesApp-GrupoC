@@ -83,6 +83,8 @@ sonar {
 		property "sonar.projectKey", "martinBoglione_UNQ-202402-grupoG"
 		property "sonar.organization", "martinboglione"
 		property "sonar.host.url", "https://sonarcloud.io"
-		property "sonar.coverage.jacoco.xmlReportPaths", "$buildDir/reports/jacoco/test/jacocoTestReport.xml"
+		property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
+		property "sonar.jacoco.reportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
+		property "sonar.coverage.exclusions", "**/webservice/**, **/security/**, **/dto/**"
 	}
 }

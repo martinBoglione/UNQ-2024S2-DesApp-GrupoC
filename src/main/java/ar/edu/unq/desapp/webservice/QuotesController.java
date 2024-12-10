@@ -53,9 +53,9 @@ public class QuotesController {
     @LogExecutionTime
     @Operation(summary = "Get 24H quotes for a given crypto")
     @GetMapping("/quotes/24h/{symbol}")
-    public ResponseEntity<List> get24HoursQuotes(@Parameter(description = "The cryptocurrency symbol that needs to be fetched", required = true) @PathVariable String symbol) {
+    public ResponseEntity<List<Crypto>> get24HoursQuotes(@Parameter(description = "The cryptocurrency symbol that needs to be fetched", required = true) @PathVariable String symbol) {
 
-        List list = cryptoService.getCryptoClosingPricesLast24Hours(symbol);
+        List<Crypto> list = cryptoService.getCryptoClosingPricesLast24Hours(symbol);
         return ResponseEntity.ok().body(list);
     }
 }
