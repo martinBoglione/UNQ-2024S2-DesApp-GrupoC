@@ -3,7 +3,9 @@ package ar.edu.unq.desapp.helpers;
 import org.junit.jupiter.api.Test;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import static org.junit.jupiter.api.Assertions.*;
 class CurrentTimeTest {
@@ -12,13 +14,13 @@ class CurrentTimeTest {
     void currentTimeIsNotEmptyString() {
         assertNotNull(CurrentTime.getNewDateString());
         assertInstanceOf(String.class, CurrentTime.getNewDateString());
-        assertTrue(CurrentTime.getNewDateString().length() > 0);
+        assertFalse(CurrentTime.getNewDateString().isEmpty());
     }
 
     @Test
-    void millisecondsAreCorrectlyFormattedToTimestamp() {
-        Date timestampDate = new Date(Long.parseLong("1333444555000"));
-        assertEquals("03/04/2012 06:15:55", CurrentTime.getNewDateFormatter().format(timestampDate));
+    void timestampAreCorrectlyFormattedAccordingToPattern() {
+        Date timestampDate = new GregorianCalendar(2020, Calendar.OCTOBER, 31).getTime();
+        assertEquals("31/10/2020 00:00:00", CurrentTime.getNewDateFormatter().format(timestampDate));
     }
 
     @Test
