@@ -1,4 +1,20 @@
 ---------------------------------------------------------------------
+TAG v3.0.1
+---------------------------------------------------------------------
+NEW FEATURES
+* Circuito operativo completo para comprar y vender criptos.
+* Listado de cotizaciones utilizando cache (Caffeine).
+* Tests de controllers (utilizando MockMvc).
+
+NOTES
+* Se pueden agregar más tests unitarios y de controllers.
+* Refactorizar lógica de negocio embedida en controllers y pasarla a los servicios.
+
+KNOWN ISSUES
+* Se puede mejorar el coverage y la calidad (revisar SonarCloud)
+
+
+---------------------------------------------------------------------
 TAG v3.0.0
 ---------------------------------------------------------------------
 NEW FEATURES (lo que están entregando y está funcionando):
