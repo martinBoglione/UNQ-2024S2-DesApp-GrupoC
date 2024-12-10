@@ -14,7 +14,6 @@ public class OrderResponseDTO {
     private String operationType;
     private String userName;
     private String userSurname;
-    //private String userWalletAddress;
 
     public OrderResponseDTO(String asset, double quantity, double price, double amountArs, String operationType, String userName, String userSurname) {
         this.asset = asset;
@@ -24,7 +23,6 @@ public class OrderResponseDTO {
         this.operationType = operationType;
         this.userName = userName;
         this.userSurname = userSurname;
-      //  this.userWalletAddress = userWalletAddress;
     }
 
 }

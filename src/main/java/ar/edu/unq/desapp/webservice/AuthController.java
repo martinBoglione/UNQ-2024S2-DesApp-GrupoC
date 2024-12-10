@@ -16,19 +16,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import lombok.AllArgsConstructor;
 import ar.edu.unq.desapp.service.AuthenticationService;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/auth")
 @Tag(name = "Authentication", description = "Authentication API")
 public class AuthController {
 
-    @Autowired
     private final JwtUtil jwtService;
-
     private final AuthenticationService authenticationService;
+
+    @Autowired
+    public AuthController(JwtUtil jwtService, AuthenticationService authenticationService) {
+        this.jwtService = jwtService;
+        this.authenticationService = authenticationService;
+    }
 
     @LogExecutionTime
     @Operation(summary = "User login with email and password")
