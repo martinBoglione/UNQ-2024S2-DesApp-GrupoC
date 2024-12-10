@@ -38,9 +38,6 @@ public class QuotesController {
     @Operation(summary = "Get last quotes for all known cryptocurrencies")
     @GetMapping("/quotes/latest")
     public ResponseEntity<CryptoList> getLastPersistedCryptoCurrencyPrices() {
-        /* TODO
-        *   Cambiar esto, debe traer desde la BD, sin cache. */
-
         CryptoList list = cryptoService.getAllCryptoPrices();
         return ResponseEntity.ok().body(list);
     }
@@ -49,14 +46,14 @@ public class QuotesController {
     @Operation(summary = "Get cached quotes (fast response)")
     @GetMapping("/quotes")
     public ResponseEntity<CryptoList> getAllCryptoCurrencyPrices() {
-        CryptoList list = cryptoService.getAllCryptoPrices();
+        CryptoList list = cryptoService.getAllCachedCryptoPrices();
         return ResponseEntity.ok().body(list);
     }
 
     @LogExecutionTime
     @Operation(summary = "Get 24H quotes for a given crypto")
     @GetMapping("/quotes/24h/{symbol}")
-    public ResponseEntity get24HoursQuotes(@Parameter(description = "The cryptocurrency symbol that needs to be fetched", required = true) @PathVariable String symbol) {
+    public ResponseEntity<List> get24HoursQuotes(@Parameter(description = "The cryptocurrency symbol that needs to be fetched", required = true) @PathVariable String symbol) {
 
         List list = cryptoService.getCryptoClosingPricesLast24Hours(symbol);
         return ResponseEntity.ok().body(list);

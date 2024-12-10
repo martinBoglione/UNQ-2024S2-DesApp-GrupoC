@@ -5,7 +5,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import java.util.function.Function;
 import java.util.Date;
@@ -28,7 +27,7 @@ public class JwtUtil {
     private Claims extractAllClaims(String token) {
         return Jwts
                 .parser()
-                .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes()))
+                .verifyWith(Keys.hmacShaKeyFor(secretKey.getBytes()))
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
@@ -57,7 +56,7 @@ public class JwtUtil {
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(Keys.hmacShaKeyFor(secretKey.getBytes()), SignatureAlgorithm.HS256)
+                .signWith(Keys.hmacShaKeyFor(secretKey.getBytes()))
                 .compact();
     }
 

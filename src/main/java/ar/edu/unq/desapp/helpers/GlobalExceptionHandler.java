@@ -21,8 +21,8 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(PriceVariationException.class)
-    public ResponseEntity<String> handlePriceVariationException(PriceVariationException ex, WebRequest request) {
+    @ExceptionHandler(TransactionPreconditionException.class)
+    public ResponseEntity<String> handlePriceVariationException(TransactionPreconditionException ex, WebRequest request) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }

@@ -9,7 +9,7 @@ import static com.tngtech.archunit.library.Architectures.layeredArchitecture;
 import com.tngtech.archunit.lang.ArchRule;
 import com.tngtech.archunit.library.dependencies.SlicesRuleDefinition;
 
-public class DependencyTest {
+class DependencyTest {
 
     @Test
     void layeredArchitectureShouldBeRespected(){

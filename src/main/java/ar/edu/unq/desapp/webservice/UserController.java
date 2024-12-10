@@ -9,7 +9,6 @@ import ar.edu.unq.desapp.model.Order;
 import ar.edu.unq.desapp.model.User;
 import ar.edu.unq.desapp.service.UsdService;
 import ar.edu.unq.desapp.service.UserService;
-import lombok.extern.java.Log;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,7 +20,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -127,7 +125,7 @@ public class UserController {
                         user.getOperationsQuantity(),
                         user.getReputation()
                 ))
-                .collect(Collectors.toList());
+                .toList();
     }
 
 }
